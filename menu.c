@@ -2742,7 +2742,7 @@ void update_screen(void)
    else
     blit(menu_screen, screen, 0, 0, 0, 0, 320, 200);
 
- int hline_x = random() % 600;
+ int hline_x = rand() % 600;
  int i, j;
 
  if (options[0].fuzzy_menu)
@@ -2753,17 +2753,17 @@ void update_screen(void)
      rectfill(menu_screen, 0, 0, 640, 480, FADE_OUT);
      drawing_mode(DRAW_MODE_SOLID, NULL, 0, 0);
     }
-/*    if (random() % 3 == 0)
+/*    if (rand() % 3 == 0)
     {
      j = COLOUR_GREEN1;
-     if (random() % 5 == 0)
+     if (rand() % 5 == 0)
       j = COLOUR_GREEN2;
      circle(menu_screen, 320, 240, 150, j);
      hline(menu_screen, 470, 240, 640, j);
      hline(menu_screen, 0, 240, 170, j);
      vline(menu_screen, 320, 0, 90, j);
      vline(menu_screen, 320, 390, 480, j);
-     if (random() % 3 == 0 && j == COLOUR_GREEN2)
+     if (rand() % 3 == 0 && j == COLOUR_GREEN2)
      {
       j = COLOUR_GREEN1;
       circle(menu_screen, 320, 240, 149, j);
@@ -2781,10 +2781,10 @@ void update_screen(void)
       vline(menu_screen, 319, 390, 480, j);
      }
     }
-    if (random() % 3 == 0)
+    if (rand() % 3 == 0)
     {
      j = COLOUR_GREEN1;
-     if (random() % 20 == 0)
+     if (rand() % 20 == 0)
       j = COLOUR_GREEN2;
      circle(menu_screen, 320, 240, 140, j);
      for (i = 0; i < 10; i ++)
@@ -2804,17 +2804,17 @@ void update_screen(void)
       j);
      }
     }*/
-    if (random() % 40 == 0)
-     hline(menu_screen, hline_x, random() % 480, hline_x + random() % 10 + 2, COLOUR_GREEN4);
-    if (random() % 80 == 0)
+    if (rand() % 40 == 0)
+     hline(menu_screen, hline_x, rand() % 480, hline_x + rand() % 10 + 2, COLOUR_GREEN4);
+    if (rand() % 80 == 0)
     {
-     hline_x = random() % 440;
-     vline(menu_screen, random() % 640, hline_x, hline_x + random() % 20 + 2, COLOUR_GREEN4);
+     hline_x = rand() % 440;
+     vline(menu_screen, rand() % 640, hline_x, hline_x + rand() % 20 + 2, COLOUR_GREEN4);
     }
-    if (random() % 500 == 0)
-     circle(menu_screen, random() % 600, random() % 440, 3 + random() % 40, COLOUR_GREEN4);
-    if (random() % 2000 == 0)
-     circlefill(menu_screen, random() % 600, random() % 440, 3 + random() % 40, COLOUR_GREEN4);
+    if (rand() % 500 == 0)
+     circle(menu_screen, rand() % 600, rand() % 440, 3 + rand() % 40, COLOUR_GREEN4);
+    if (rand() % 2000 == 0)
+     circlefill(menu_screen, rand() % 600, rand() % 440, 3 + rand() % 40, COLOUR_GREEN4);
  }
   else
    clear_to_color(menu_screen, 0);
@@ -2822,17 +2822,17 @@ void update_screen(void)
 
  if (video_mode == 1)
  {
-    if (random() % 3 == 0 || options[0].fuzzy_menu == 0)
+    if (rand() % 3 == 0 || options[0].fuzzy_menu == 0)
     {
      j = COLOUR_GREEN1;
-     if (random() % 5 == 0)
+     if (rand() % 5 == 0)
       j = COLOUR_GREEN2;
      circle(menu_screen, 520, 380, 70, j);
      hline(menu_screen, 590, 380, 640, j);
      hline(menu_screen, 0, 380, 450, j);
      vline(menu_screen, 520, 0, 310, j);
      vline(menu_screen, 520, 450, 480, j);
-     if (random() % 3 == 0 && j == COLOUR_GREEN2 && options[0].fuzzy_menu == 1)
+     if (rand() % 3 == 0 && j == COLOUR_GREEN2 && options[0].fuzzy_menu == 1)
      {
       j = COLOUR_GREEN1;
       circle(menu_screen, 520, 380, 69, j);
@@ -2850,10 +2850,10 @@ void update_screen(void)
       vline(menu_screen, 519, 450, 480, j);
      }
     }
-    if (random() % 3 == 0 || options[0].fuzzy_menu == 0)
+    if (rand() % 3 == 0 || options[0].fuzzy_menu == 0)
     {
      j = COLOUR_GREEN1;
-     if (random() % 20 == 0)
+     if (rand() % 20 == 0)
       j = COLOUR_GREEN2;
      circle(menu_screen, 520, 380, 60, j);
      for (i = 0; i < 10; i ++)

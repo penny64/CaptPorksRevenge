@@ -1936,7 +1936,7 @@ for (gloop_x = 0; gloop_x < GRID_X; gloop_x ++)
 {
  for (gloop_y = 0; gloop_y < GRID_Y; gloop_y ++)
  {
-   if (random() % 40 == 0)
+   if (rand() % 40 == 0)
    {
     set_grid(gloop_x, gloop_y, GRID_SSTONE1);// + random() % 4;
 //    if (get_grid(gloop_x, gloop_y - 1) != 0)

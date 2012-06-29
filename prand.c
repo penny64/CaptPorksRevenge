@@ -50,7 +50,7 @@ int init_prand(int seedy)
 {
  srand(seedy);
  last_prand = seedy;
- srandom(seedy); // might as well
+ srand(seedy); // might as well
  return 1;
 }
 

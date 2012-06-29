@@ -572,8 +572,8 @@ void actor_jet(int jactor)
  actor[jactor].y_speed -= jpower;
 
  if (arena[0].counter % 6 == 0)
-//  play_sound2(WAV_JET, 100 + (actor[jactor].jet_spin * 5) + random() % 20, 250, 127);
-  play_sound_pos(WAV_JET, 100 + (actor[jactor].jet_spin * 5) + random() % 20, 250, actor[jactor].x, actor[jactor].y);
+//  play_sound2(WAV_JET, 100 + (actor[jactor].jet_spin * 5) + rand() % 20, 250, 127);
+  play_sound_pos(WAV_JET, 100 + (actor[jactor].jet_spin * 5) + rand() % 20, 250, actor[jactor].x, actor[jactor].y);
 
 // actor [actor_number].jet_power = 30;
 // actor [actor_number].jet_heat = 0;

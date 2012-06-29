@@ -1030,10 +1030,10 @@ void display_actor(int dactor, int x_centre, int y_centre, int x_limit, int y_li
     if (options[0].stipple_clouds == CLOUDS_TRANS)
      drawing_mode(DRAW_MODE_TRANS, NULL, cloud_pattern_status, 0);
 //    circlefill(bmp, put_x, put_y - 6, 7, TRANS_YELLOW);
-//    circlefill(bmp, put_x, put_y - 6, random() % 4 + 4, TRANS_WHITE);
+//    circlefill(bmp, put_x, put_y - 6, rand() % 4 + 4, TRANS_WHITE);
     circle(bmp, put_x, put_y - 6, 7 + (arena[0].counter / 5) % 8, TRANS_YELLOW);
 //    circle(bmp, put_x, put_y - 6, 8 + (arena[0].counter / 5) % 8, TRANS_WHITE);
-//    circlefill(bmp, put_x, put_y - 6, random() % 4 + 4, TRANS_WHITE);
+//    circlefill(bmp, put_x, put_y - 6, rand() % 4 + 4, TRANS_WHITE);
     drawing_mode(DRAW_MODE_SOLID, cloud_pattern, 0, 0);
   }
 
@@ -1246,10 +1246,10 @@ void draw_actor_sprite(int dactor, int flip, BITMAP *sprite, BITMAP *bmp, int pu
 //   switch(flip)
 //   {
 //    case 0: // no flip
-     distortion_mask(sprite, bmp, put_x - actor[dactor].sprite_width, put_y - actor[dactor].sprite_height, actor[dactor].sprite_width * 2 + 1, actor[dactor].sprite_height * 2 + 1, random() % 3 - 1, random() % 3 - 1, 1, 1);
+     distortion_mask(sprite, bmp, put_x - actor[dactor].sprite_width, put_y - actor[dactor].sprite_height, actor[dactor].sprite_width * 2 + 1, actor[dactor].sprite_height * 2 + 1, rand() % 3 - 1, rand() % 3 - 1, 1, 1);
 //    break;
 //    case 1: // h flip
-//     distortion_mask(sprite, bmp, put_x - actor[dactor].sprite_width, put_y - actor[dactor].sprite_height, actor[dactor].sprite_width * 2 + 1, actor[dactor].sprite_height * 2 + 1, random() % 3 - 1, random() % 3 - 1, -1, 1);
+//     distortion_mask(sprite, bmp, put_x - actor[dactor].sprite_width, put_y - actor[dactor].sprite_height, actor[dactor].sprite_width * 2 + 1, actor[dactor].sprite_height * 2 + 1, rand() % 3 - 1, rand() % 3 - 1, -1, 1);
 //    break;
   /*  case 2: // v flip
     draw_sprite_h_flip(bmp, sprite, put_x - actor[dactor].width, put_y - actor[dactor].height);
@@ -1270,7 +1270,7 @@ void draw_actor_sprite(int dactor, int flip, BITMAP *sprite, BITMAP *bmp, int pu
 void shield_effect(int dactor, BITMAP *bmp, int put_x, int put_y, int magnitude)
 {
 
-     distortion_mask(shield_circle [actor[dactor].circle_radius], bmp, put_x - actor[dactor].circle_radius, put_y - actor[dactor].circle_radius, actor[dactor].circle_radius * 2 + 1, actor[dactor].circle_radius * 2 + 1, random() % (magnitude) - (magnitude / 2), random() % (magnitude) - (magnitude / 2), 1, 1);
+     distortion_mask(shield_circle [actor[dactor].circle_radius], bmp, put_x - actor[dactor].circle_radius, put_y - actor[dactor].circle_radius, actor[dactor].circle_radius * 2 + 1, actor[dactor].circle_radius * 2 + 1, rand() % (magnitude) - (magnitude / 2), rand() % (magnitude) - (magnitude / 2), 1, 1);
 
 }
 
@@ -1295,7 +1295,7 @@ void soft_shield_effect(int dactor, BITMAP *bmp, int put_x, int put_y, int magni
 /*void distort_circle(BITMAP *bmp, int put_x, int put_y, int radius, int magnitude)
 {
 
-     distortion_mask(disrupter_circle, bmp, put_x - radius, put_y - radius, radius * 2 + 1, radius * 2 + 1, random() % (magnitude) - (magnitude / 2), random() % (magnitude) - (magnitude / 2), 1, 1);
+     distortion_mask(disrupter_circle, bmp, put_x - radius, put_y - radius, radius * 2 + 1, radius * 2 + 1, rand() % (magnitude) - (magnitude / 2), rand() % (magnitude) - (magnitude / 2), 1, 1);
 
 }*/
 
@@ -1553,7 +1553,7 @@ void display_bullet(int dbull, int x_centre, int y_centre,
   draw_trans_sprite(bmp, bomb_bmp [BOMB_TOXIN], put_x - 2, put_y - 3);
   break;
   case BULLET_DIRTCLOD:
-  putpixel(bmp, put_x - 1 + random() % 3, put_y - 1 + random() % 3, COLOUR_BROWN3);
+  putpixel(bmp, put_x - 1 + rand() % 3, put_y - 1 + rand() % 3, COLOUR_BROWN3);
   putpixel(bmp, put_x, put_y, COLOUR_BROWN3);
   break;
   case BULLET_DIRTBOMB:
@@ -1763,7 +1763,7 @@ void display_bullet(int dbull, int x_centre, int y_centre,
 //  break;
   
   case BULLET_HUNTER_BOMB:
-  putpixel(bmp, put_x - 1 + random() % 3, put_y - 1 + random() % 3, COLOUR_GREEN1 + (arena[0].counter / 10) % 4);
+  putpixel(bmp, put_x - 1 + rand() % 3, put_y - 1 + rand() % 3, COLOUR_GREEN1 + (arena[0].counter / 10) % 4);
   case BULLET_HUNTER:
   putpixel(bmp, put_x, put_y, COLOUR_GREEN1 + (arena[0].counter / 10) % 4);
   break;
@@ -1777,10 +1777,10 @@ void display_bullet(int dbull, int x_centre, int y_centre,
   case BULLET_PLAS_R:
   if (options[0].stipple_clouds == CLOUDS_TRANS)
    drawing_mode(DRAW_MODE_TRANS, NULL, cloud_pattern_status, 0);
-  circlefill(bmp, put_x, put_y, 1 + (random() % 2), TRANS_BLUE);
+  circlefill(bmp, put_x, put_y, 1 + (rand() % 2), TRANS_BLUE);
   drawing_mode(DRAW_MODE_SOLID, cloud_pattern, 0, 0);
-  circlefill(bmp, put_x, put_y, 1 + (random() % 2), COLOUR_BLUE4);
-//  circle(bmp, put_x, put_y, 6, 48 + random() % 32);
+  circlefill(bmp, put_x, put_y, 1 + (rand() % 2), COLOUR_BLUE4);
+//  circle(bmp, put_x, put_y, 6, 48 + rand() % 32);
   break;
   case BULLET_CUBE:
   if (options[0].stipple_clouds == CLOUDS_TRANS)
@@ -1791,73 +1791,73 @@ void display_bullet(int dbull, int x_centre, int y_centre,
   rect(bmp, put_x - 2, put_y - 2, put_x + 2, put_y + 2, bcol);
   break;
   case BULLET_IMPLODER:
-  if (random() % 6 == 0)
-   circlefill(bmp, put_x, put_y, 3, 32 + random() % 40);
+  if (rand() % 6 == 0)
+   circlefill(bmp, put_x, put_y, 3, 32 + rand() % 40);
   circlefill(bmp, put_x, put_y, 2, 0);
   break;
   case BULLET_IMPLOSION:
-  if (random() % 6 == 0)
-   circlefill(bmp, put_x, put_y, bullet[dbull].status + 1, 32 + random() % 40);
+  if (rand() % 6 == 0)
+   circlefill(bmp, put_x, put_y, bullet[dbull].status + 1, 32 + rand() % 40);
   circlefill(bmp, put_x, put_y, bullet[dbull].status, 0);
-  distortion_mask(disrupter_circle2, bmp, put_x - 19, put_y - 19, 42, 42, ((random() % bullet[dbull].fuse + 1) / 5) - ((bullet[dbull].fuse + 1) / 10), ((random() % bullet[dbull].fuse + 1) / 5) - ((bullet[dbull].fuse + 1) / 10), 1, 1);
+  distortion_mask(disrupter_circle2, bmp, put_x - 19, put_y - 19, 42, 42, ((rand() % bullet[dbull].fuse + 1) / 5) - ((bullet[dbull].fuse + 1) / 10), ((rand() % bullet[dbull].fuse + 1) / 5) - ((bullet[dbull].fuse + 1) / 10), 1, 1);
   break;
   case BULLET_NAPALM:
   if (options[0].stipple_clouds == CLOUDS_TRANS)
    drawing_mode(DRAW_MODE_TRANS, NULL, cloud_pattern_status, 0);
-  circlefill(bmp, put_x, put_y, (1 + random() % 3), TRANS_RED);
-  circlefill(bmp, put_x + random() % 10 - 5, put_y + random() % 10 - 5, 1 + random() % 5, TRANS_ORANGE);
+  circlefill(bmp, put_x, put_y, (1 + rand() % 3), TRANS_RED);
+  circlefill(bmp, put_x + rand() % 10 - 5, put_y + rand() % 10 - 5, 1 + rand() % 5, TRANS_ORANGE);
 /*  if (bullet[dbull].fuse >= 16)
   {
-       circlefill(bmp, put_x + random() % 8 - 4, put_y + random() % 8 - 4, 1 + random() % 5, TRANS_YELLOW);
+       circlefill(bmp, put_x + rand() % 8 - 4, put_y + rand() % 8 - 4, 1 + rand() % 5, TRANS_YELLOW);
   }
         else
         {
-         circlefill(bmp, put_x + random() % 8 - 4, put_y + random() % 8 - 4, 1 + random() % 5, TRANS_RED);
+         circlefill(bmp, put_x + rand() % 8 - 4, put_y + rand() % 8 - 4, 1 + rand() % 5, TRANS_RED);
         }
-  if (random() % 8 == 0)
-   circlefill(bmp, put_x, put_y, (1 + random() % 2), TRANS_YELLOW);*/
+  if (rand() % 8 == 0)
+   circlefill(bmp, put_x, put_y, (1 + rand() % 2), TRANS_YELLOW);*/
   drawing_mode(DRAW_MODE_SOLID, cloud_pattern, 0, 0);
   break;
   case BULLET_FIREBALL:
   if (options[0].stipple_clouds == CLOUDS_TRANS)
    drawing_mode(DRAW_MODE_TRANS, NULL, cloud_pattern_status, 0);
-  circlefill(bmp, put_x, put_y, (bullet[dbull].fuse / 50) + 1 + random() % 3, TRANS_RED);
+  circlefill(bmp, put_x, put_y, (bullet[dbull].fuse / 50) + 1 + rand() % 3, TRANS_RED);
   circlefill(bmp, put_x, put_y, (bullet[dbull].fuse / 60) + 1, TRANS_YELLOW);
   drawing_mode(DRAW_MODE_SOLID, cloud_pattern, 0, 0);
   break;
   case BULLET_PLAS_C:
   if (options[0].stipple_clouds == CLOUDS_TRANS)
    drawing_mode(DRAW_MODE_TRANS, NULL, cloud_pattern_status, 0);
-  circlefill(bmp, put_x, put_y, (2 + random() % 4), TRANS_RED);
-  circlefill(bmp, put_x, put_y, (2 + random() % 3), TRANS_YELLOW);
+  circlefill(bmp, put_x, put_y, (2 + rand() % 4), TRANS_RED);
+  circlefill(bmp, put_x, put_y, (2 + rand() % 3), TRANS_YELLOW);
   drawing_mode(DRAW_MODE_SOLID, cloud_pattern, 0, 0);
 //  cast_light(bmp, put_x, put_y, 20, 1);
 //  cast_light(bmp, put_x, put_y, 16, 1);
 //  cast_light(bmp, put_x, put_y, 14, 1);
-//  circle(bmp, put_x, put_y, 7, 48 + random() % 32);
+//  circle(bmp, put_x, put_y, 7, 48 + rand() % 32);
   break;
   case BULLET_NUKE_PLAS:
   if (options[0].stipple_clouds == CLOUDS_TRANS)
    drawing_mode(DRAW_MODE_TRANS, NULL, cloud_pattern_status, 0);
-  circlefill(bmp, put_x, put_y, (7 + random() % 3), TRANS_RED);
-  circlefill(bmp, put_x, put_y, (6 + random() % 2), TRANS_YELLOW);
+  circlefill(bmp, put_x, put_y, (7 + rand() % 3), TRANS_RED);
+  circlefill(bmp, put_x, put_y, (6 + rand() % 2), TRANS_YELLOW);
   drawing_mode(DRAW_MODE_SOLID, cloud_pattern, 0, 0);
   break;
   case BULLET_PLINKER:
-//  circlefill(bmp, put_x, put_y, (1 + random() % 3), COLOUR_BLUE3);
-  circlefill(bmp, put_x, put_y, (3 + random() % 2), COLOUR_PURPLE);
+//  circlefill(bmp, put_x, put_y, (1 + rand() % 3), COLOUR_BLUE3);
+  circlefill(bmp, put_x, put_y, (3 + rand() % 2), COLOUR_PURPLE);
   break;
   case BULLET_RECTIFIER:
-  if (random() % 2)
-   circlefill(bmp, put_x, put_y, (3 + random() % 2), COLOUR_GREEN4);
-    else circlefill(bmp, put_x, put_y, (3 + random() % 2), COLOUR_GREEN3);
+  if (rand() % 2)
+   circlefill(bmp, put_x, put_y, (3 + rand() % 2), COLOUR_GREEN4);
+    else circlefill(bmp, put_x, put_y, (3 + rand() % 2), COLOUR_GREEN3);
   break;
   case BULLET_FLAME:
 /*  circlefill(bmp, put_x, put_y, bullet[dbull].status, palette_color [45]);
   if (bullet[dbull].fuse >= 13)
-       circlefill(bmp, put_x, put_y, (1 + random() % (bullet[dbull].fuse - 12)), palette_color [YELLOW]);
+       circlefill(bmp, put_x, put_y, (1 + rand() % (bullet[dbull].fuse - 12)), palette_color [YELLOW]);
         else
-         circlefill(bmp, put_x, put_y, (1 + random() % bullet[dbull].status), palette_color [RED]);
+         circlefill(bmp, put_x, put_y, (1 + rand() % bullet[dbull].status), palette_color [RED]);
          */
      if (arena[0].counter % 3 != 0)
       drawing_mode(DRAW_MODE_MASKED_PATTERN, cloud_pattern, cloud_pattern_status, 0);
@@ -1865,20 +1865,20 @@ void display_bullet(int dbull, int x_centre, int y_centre,
 //     drawing_mode(DRAW_MODE_MASKED_PATTERN, cloud_pattern, cloud_pattern_status, 0);
     if (options[0].stipple_clouds == CLOUDS_TRANS)
      drawing_mode(DRAW_MODE_TRANS, NULL, cloud_pattern_status, 0);
-  circlefill(bmp, put_x + random() % 10, put_y + random() % 10, bullet[dbull].status / 2 + 1, TRANS_ORANGE);
-//  circlefill(bmp, put_x + random() % 10, put_y + random() % 10, bullet[dbull].status / 2 + 1, TRANS_ORANGE);
-//  circlefill(bmp, put_x + random() % 10, put_y + random() % 10, bullet[dbull].status / 2 + 1, TRANS_ORANGE);
+  circlefill(bmp, put_x + rand() % 10, put_y + rand() % 10, bullet[dbull].status / 2 + 1, TRANS_ORANGE);
+//  circlefill(bmp, put_x + rand() % 10, put_y + rand() % 10, bullet[dbull].status / 2 + 1, TRANS_ORANGE);
+//  circlefill(bmp, put_x + rand() % 10, put_y + rand() % 10, bullet[dbull].status / 2 + 1, TRANS_ORANGE);
   if (bullet[dbull].fuse >= 16)
   {
-       circlefill(bmp, put_x + random() % 5, put_y + random() % 5, (1 + random() % (bullet[dbull].fuse - 12)) / 2, TRANS_YELLOW);
-//       circlefill(bmp, put_x + random() % 5, put_y + random() % 5, (1 + random() % (bullet[dbull].fuse - 12)) / 2, TRANS_YELLOW);
-//       circlefill(bmp, put_x + random() % 5, put_y + random() % 5, (1 + random() % (bullet[dbull].fuse - 12)) / 2, TRANS_YELLOW);
+       circlefill(bmp, put_x + rand() % 5, put_y + rand() % 5, (1 + rand() % (bullet[dbull].fuse - 12)) / 2, TRANS_YELLOW);
+//       circlefill(bmp, put_x + rand() % 5, put_y + rand() % 5, (1 + rand() % (bullet[dbull].fuse - 12)) / 2, TRANS_YELLOW);
+//       circlefill(bmp, put_x + rand() % 5, put_y + rand() % 5, (1 + rand() % (bullet[dbull].fuse - 12)) / 2, TRANS_YELLOW);
   }
         else
         {
-         circlefill(bmp, put_x + random() % 5, put_y + random() % 5, (1 + random() % bullet[dbull].status), TRANS_RED);
-//         circlefill(bmp, put_x + random() % 5, put_y + random() % 5, (1 + random() % bullet[dbull].status), TRANS_RED);
-//         circlefill(bmp, put_x + random() % 5, put_y + random() % 5, (1 + random() % bullet[dbull].status), TRANS_RED);
+         circlefill(bmp, put_x + rand() % 5, put_y + rand() % 5, (1 + rand() % bullet[dbull].status), TRANS_RED);
+//         circlefill(bmp, put_x + rand() % 5, put_y + rand() % 5, (1 + rand() % bullet[dbull].status), TRANS_RED);
+//         circlefill(bmp, put_x + rand() % 5, put_y + rand() % 5, (1 + rand() % bullet[dbull].status), TRANS_RED);
         }
 
     drawing_mode(DRAW_MODE_SOLID, cloud_pattern, 0, 0);
@@ -1887,19 +1887,19 @@ void display_bullet(int dbull, int x_centre, int y_centre,
   case BULLET_FUNKY_BOMBLET:
 //  lit = get_light_level_pixel(bullet[dbull].x, bullet[dbull].y);
 //  if (lit > 4) lit = 4;
-  if (!(random() % 3))
+  if (!(rand() % 3))
    draw_trans_sprite(bmp, bomb_bmp [BOMB_GRENADE], put_x - 2, put_y - 3);
     else
-     if (!(random() % 3))
+     if (!(rand() % 3))
       draw_trans_sprite(bmp, bomb_bmp [BOMB_FIREBOMB], put_x - 2, put_y - 3);
     else
-     if (!(random() % 3))
+     if (!(rand() % 3))
       draw_trans_sprite(bmp, bomb_bmp [BOMB_TOXIN], put_x - 2, put_y - 3);
     else
       draw_trans_sprite(bmp, bomb_bmp [BOMB_REDBOMB], put_x - 2, put_y - 3);
   break;
   case BULLET_DISRUPTER_WAVE:
-  distortion_mask(disrupter_circle2, bmp, put_x - 19, put_y - 19, 42, 42, (random() % 11) - 5, (random() % 11) - 5, 1, 1);
+  distortion_mask(disrupter_circle2, bmp, put_x - 19, put_y - 19, 42, 42, (rand() % 11) - 5, (rand() % 11) - 5, 1, 1);
   break;
   case BULLET_DISRUPTER:
   distortion_mask(disrupter_circle, bmp, put_x - 5, put_y - 5, 11, 11, 5, 5, 1, 1);
@@ -1909,28 +1909,28 @@ void display_bullet(int dbull, int x_centre, int y_centre,
   clear_bitmap(disrupter_circle3);
   circlefill(disrupter_circle3, 30, 30, 30 - (bullet[dbull].fuse / 2), 1);
   circlefill(disrupter_circle3, 30, 30, 30 - (bullet[dbull].fuse), 0);
-  distortion_mask(disrupter_circle3, bmp, put_x - 29, put_y - 29, 62, 62, ((random() % bullet[dbull].fuse + 1) / 2) - ((bullet[dbull].fuse + 1) / 4), ((random() % bullet[dbull].fuse + 1) / 2) - ((bullet[dbull].fuse + 1) / 4), 1, 1);
+  distortion_mask(disrupter_circle3, bmp, put_x - 29, put_y - 29, 62, 62, ((rand() % bullet[dbull].fuse + 1) / 2) - ((bullet[dbull].fuse + 1) / 4), ((rand() % bullet[dbull].fuse + 1) / 2) - ((bullet[dbull].fuse + 1) / 4), 1, 1);
   break;
   case BULLET_NUKE_EXP:
   if (options[0].stipple_clouds == CLOUDS_TRANS)
    drawing_mode(DRAW_MODE_TRANS, NULL, cloud_pattern_status, 0);
   if (prand(3) == 0)
   {
-   circlefill(bmp, put_x, put_y, 10 + (random() % 5), TRANS_ORANGE);
+   circlefill(bmp, put_x, put_y, 10 + (rand() % 5), TRANS_ORANGE);
   }
     else
     {
      if (prand(3) == 0)
-      circlefill(bmp, put_x, put_y, 10 + (random() % 5), TRANS_YELLOW);
+      circlefill(bmp, put_x, put_y, 10 + (rand() % 5), TRANS_YELLOW);
        else
-         circlefill(bmp, put_x, put_y, 10 + (random() % 5), TRANS_RED);
+         circlefill(bmp, put_x, put_y, 10 + (rand() % 5), TRANS_RED);
     }
   break;
   case BULLET_FLESH:
 //  lit = get_light_level_pixel(bullet[dbull].x, bullet[dbull].y);
 //  bcol = adjust_lit_colour(bullet[dbull].status, lit);
   drawing_mode(DRAW_MODE_TRANS, NULL, NULL, 0);
-  circlefill(bmp, put_x, put_y, 1 + random() % 2, bullet[dbull].status);
+  circlefill(bmp, put_x, put_y, 1 + rand() % 2, bullet[dbull].status);
   drawing_mode(DRAW_MODE_SOLID, NULL, 0, 0);
   break;
   case BULLET_SPLINTER:
@@ -1939,8 +1939,8 @@ void display_bullet(int dbull, int x_centre, int y_centre,
 //  bcol = adjust_lit_colour(bullet[dbull].status, lit);
   drawing_mode(DRAW_MODE_TRANS, NULL, NULL, 0);
   putpixel(bmp, put_x, put_y, bullet[dbull].status);
-  putpixel(bmp, put_x - 1 + random() % 3, put_y - 1 + random() % 3, bullet[dbull].status);
-  putpixel(bmp, put_x - 1 + random() % 3, put_y - 1 + random() % 3, bullet[dbull].status);
+  putpixel(bmp, put_x - 1 + rand() % 3, put_y - 1 + rand() % 3, bullet[dbull].status);
+  putpixel(bmp, put_x - 1 + rand() % 3, put_y - 1 + rand() % 3, bullet[dbull].status);
   drawing_mode(DRAW_MODE_SOLID, NULL, 0, 0);
   break;
   case BULLET_SPECK:
@@ -1953,9 +1953,9 @@ void display_bullet(int dbull, int x_centre, int y_centre,
 /*  case BULLET_NAPALM:
   circlefill(bmp, put_x, put_y, bullet[dbull].height, palette_color [45]);
   if (bullet[dbull].fuse >= 13)
-       circlefill(bmp, put_x, put_y, (1 + random() % ((bullet[dbull].fuse / 5) - 12)), palette_color [YELLOW]);
+       circlefill(bmp, put_x, put_y, (1 + rand() % ((bullet[dbull].fuse / 5) - 12)), palette_color [YELLOW]);
         else
-         circlefill(bmp, put_x, put_y, (1 + random() % bullet[dbull].height), palette_color [RED]);
+         circlefill(bmp, put_x, put_y, (1 + rand() % bullet[dbull].height), palette_color [RED]);
   break;*/
   }
 
@@ -2099,7 +2099,7 @@ void display_beams(int dactor, int x_centre, int y_centre,
 //    flare_x += actor [dactor].x / GRAIN + (actor[dactor].fire_x * actor[dactor].facing) + x_limit - x_centre;
 //    flare_y += actor [dactor].y / GRAIN + actor[dactor].fire_y + y_limit - y_centre;
 
-    circlefill(bmp, put_x_1, put_y_1, 3 + random() % 2, lcol);
+    circlefill(bmp, put_x_1, put_y_1, 3 + rand() % 2, lcol);
     
 //    circlefill(bmp, put_x_2, put_y_2, 3 + prand(3), lcol);
     drawing_mode(DRAW_MODE_SOLID, cloud_pattern, 0, 0);
@@ -3016,9 +3016,9 @@ int da = 0, mapx, mapy;
 
 /*
 // draws a radar line. Irritating.
-   line(bmp, map_x + ((arena[0].counter % 32) * map_width) / 32 + 2, map_y, map_x + ((arena[0].counter % 32) * map_width) / 32 + 2, map_y + map_height + 1, 105 + random() % 3);
-   line(bmp, map_x + ((arena[0].counter % 32) * map_width) / 32 + 1, map_y, map_x + ((arena[0].counter % 32) * map_width) / 32 + 1, map_y + map_height + 1, 108 + random() % 3);
-   line(bmp, map_x + ((arena[0].counter % 32) * map_width) / 32, map_y, map_x + ((arena[0].counter % 32) * map_width) / 32, map_y + map_height + 1, 110 + random() % 2);
+   line(bmp, map_x + ((arena[0].counter % 32) * map_width) / 32 + 2, map_y, map_x + ((arena[0].counter % 32) * map_width) / 32 + 2, map_y + map_height + 1, 105 + rand() % 3);
+   line(bmp, map_x + ((arena[0].counter % 32) * map_width) / 32 + 1, map_y, map_x + ((arena[0].counter % 32) * map_width) / 32 + 1, map_y + map_height + 1, 108 + rand() % 3);
+   line(bmp, map_x + ((arena[0].counter % 32) * map_width) / 32, map_y, map_x + ((arena[0].counter % 32) * map_width) / 32, map_y + map_height + 1, 110 + rand() % 2);
 */
  
 }

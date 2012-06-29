@@ -2476,7 +2476,7 @@ return 0;
 void random_ai_name(char *name)
 {
 
- strcpy(name, ai_name [random() % AI_NAMES]);
+ strcpy(name, ai_name [rand() % AI_NAMES]);
  if (strlen(name) == 0)
   strcpy(name, "Porkupine");
 
