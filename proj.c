@@ -821,13 +821,10 @@ void video_modes(void)
   max_menu_entries = 12;
   break;
   case 2:
-  window_x_sp = 655; // 640 - all these values are + 15 so that there's some
+  window_x_sp = 815; // 640 - all these values are + 15 so that there's some
    // extra for distortion_mask to read from.
-  window_y = 420; // + 10
-  window_x_2p = 335; // 320
-/*  window_grid_x_sp = 23;
-  window_grid_y = 22;
-  window_grid_x_2p = 12;*/
+  window_y = 610; // + 10
+  window_x_2p = 435; // 320
   window_grid_x_sp = 690;
   window_grid_y = 440;
   window_grid_x_2p = 320; // 320
@@ -840,8 +837,8 @@ void video_modes(void)
 
   window_sp_offset = 330;
 
-  stat_x_pos = 10;
-  stat_y_pos = 400;
+  stat_x_pos = 20;
+  stat_y_pos = 540;
   stat_bar_width = 10;
   stat_pix_per_point_1p = 4;
   stat_pix_per_point_2p = 2;
@@ -851,9 +848,9 @@ void video_modes(void)
 
   map_sp_x = 580;
   map_2p_x = 250;
-  map_y = 350;
-  map_width = 50;
-  map_height = 30;
+  map_y = 740;
+  map_width = 200;
+  map_height = 200;
 
   max_menu_entries = 12;
   
@@ -1015,11 +1012,12 @@ void init_everything_once(void)
    
 //   clrscr();
 
-   printf("\n\r\n\rWelcome to Captain Pork's Revenge (version 1.01)!");
-   //printf("\n\r\n\rCaptain Pork's Revenge is free software");
-   //printf("\n\r(you are welcome to redistribute it under certain");
-   //printf("\n\rconditions) and comes with absolutely no warranty.");
-   //printf("\n\rFor details read LICENCE.TXT.");
+   printf("Welcome to Captain Pork's Revenge 2012 (version 1.02)!\n");
+   printf("Captain Pork's Revenge is free software\n");
+   printf("(you are welcome to redistribute it under certain\n");
+   printf("conditions) and comes with absolutely no warranty.\n");
+   printf("For details read LICENCE.TXT.\n");
+   printf("Ported to Windows/Linux by flags.\n");
    //printf("\n\r\n\rPress 3 to start in 320x200 mode or any other key for 640x480.");
    init_config();
    init_sound();
@@ -1043,7 +1041,7 @@ void init_everything_once(void)
    switch(video_mode)
    {
     case 0:
-    if (set_gfx_mode(GFX_AUTODETECT, 320, 200, 0, 0) != 0)
+    if (set_gfx_mode(GFX_AUTODETECT_WINDOWED, 320, 200, 0, 0) != 0)
     {
       set_gfx_mode(GFX_TEXT, 0, 0, 0, 0);
       allegro_message("Unable to set 320x200 mode\n%s\n", allegro_error);
@@ -1051,7 +1049,7 @@ void init_everything_once(void)
     }
     break;
     case 1:
-    if (set_gfx_mode(GFX_AUTODETECT, 640, 480, 0, 0) != 0)
+    if (set_gfx_mode(GFX_AUTODETECT_WINDOWED, 640, 480, 0, 0) != 0)
     {
       set_gfx_mode(GFX_TEXT, 0, 0, 0, 0);
       allegro_message("Unable to set 640x480 mode\n%s\n", allegro_error);
@@ -1059,7 +1057,7 @@ void init_everything_once(void)
     }
     break;
     case 2:
-    if (set_gfx_mode(GFX_AUTODETECT, 800, 600, 0, 0) != 0)
+    if (set_gfx_mode(GFX_AUTODETECT_WINDOWED, 800, 600, 0, 0) != 0)
     {
       set_gfx_mode(GFX_TEXT, 0, 0, 0, 0);
       allegro_message("Unable to set 800x600 mode\n%s\n", allegro_error);

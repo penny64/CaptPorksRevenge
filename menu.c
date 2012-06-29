@@ -240,14 +240,14 @@ int stc;
       strcat(ststring, "(empty)");
      } else strcat(ststring, wlist[player[player_choosing].weapon [stc]].long_name);
     }
-    textprintf_right(menu_screen, large_font, window_x_sp - 25, 5 + line_length + (85 * (video_mode == 1)), COLOUR_YELLOW4, ststring);
+    textprintf_right(menu_screen, large_font, window_x_sp - 25, 5 + line_length + (85 * (video_mode >= 1)), COLOUR_YELLOW4, ststring);
 
    }
    if (cmenu == atype_menu)
    {
     if (player_choosing == 1) strcpy(ststring, player[1].pname);
      else strcpy(ststring, player[2].pname);
-    textprintf_centre(menu_screen, large_font, window_x_sp / 2, 5 + line_length + (55 * (video_mode == 1)), COLOUR_YELLOW4, ststring);
+    textprintf_centre(menu_screen, large_font, window_x_sp / 2, 5 + line_length + (55 * (video_mode >= 1)), COLOUR_YELLOW4, ststring);
 
    }
 
@@ -306,7 +306,7 @@ int stc;
    strcpy(temp_string [i], "");
   }
 
- if (video_mode == 1)
+ if (video_mode >= 1)
  {
   for (i = 0; i < strlen(cmenu[mcount].entry_description); i ++)
   {
@@ -1781,7 +1781,7 @@ void print_scroll_arrows(int menu_size)
 
  int tri_x = window_x_sp / 2;
 
- if (video_mode == 1)
+ if (video_mode >= 1)
  {
   tri_x = 100;
 //void draw_sprite(BITMAP *bmp, BITMAP *sprite, int x, int y);
@@ -2739,8 +2739,10 @@ void update_screen(void)
 
  if (video_mode == 1)
   blit(menu_screen, screen, 0, 0, 0, 0, 640, 480);
-   else
-    blit(menu_screen, screen, 0, 0, 0, 0, 320, 200);
+ else if (video_mode == 2)
+  blit(menu_screen, screen, 0, 0, 0, 0, 800, 600);
+ else
+  blit(menu_screen, screen, 0, 0, 0, 0, 320, 200);
 
  int hline_x = rand() % 600;
  int i, j;
@@ -2987,7 +2989,7 @@ void quit_game(void)
 
       set_gfx_mode(GFX_TEXT, 0, 0, 0, 0);
 //      clrscr();
-      allegro_message("\n\rBye bye!                           ");
+      printf("\nThanks for playing!");
 //      free(palet);
       exit(0);
 

@@ -1,6 +1,5 @@
 CC     = gcc
 CFLAGS = -g
-
 OS     = $(shell uname)
 
 ifeq ($(OS), Linux)
@@ -16,10 +15,14 @@ CaptPorksRevenge: *.c
 		$(CC) $(LDFLAGS) -o $@ $^
 
 clean: FRC
-		rm -f CaptPorksRevenge
+		ifeq ($(OS), Linux)
+			rm -f CaptPorksRevenge
+		else
+			del CaptPorksRevenge.exe
+		endif
 
-install:
-		mv ../builds/cat2012 /usr/bin/cat2012
+#install:
+#		mv CaptPorksRevenge /usr/bin/CaptPorksRevenge
 
 # This pseudo target causes all targets that depend on FRC
 # to be remade even in case a file with the name of the target exists.

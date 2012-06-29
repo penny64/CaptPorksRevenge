@@ -2774,10 +2774,10 @@ if (no_players == 1)
       circlefill(bmp_p1, cross_x + window_centre_x_sp, cross_y + window_centre_y, (200 - game_over) / 15, 176 + (200 - game_over) / 14); //arena[0].counter);
       */
       if (player[1].winner == 0)
-       display_game_writing(bmp_p1, 1, window_centre_x_sp, window_centre_y, 20 + (video_mode == 1) * 20);
+       display_game_writing(bmp_p1, 1, window_centre_x_sp, window_centre_y, 20 + (video_mode >= 1) * 20);
 //       draw_sprite(bmp_p1, game_over_sign, window_centre_x_sp - 40, window_centre_y - 40);
         else
-         display_game_writing(bmp_p1, 0, window_centre_x_sp, window_centre_y, 20 + (video_mode == 1) * 20);
+         display_game_writing(bmp_p1, 0, window_centre_x_sp, window_centre_y, 20 + (video_mode >= 1) * 20);
 //         draw_sprite(bmp_p1, you_win_sign, window_centre_x_sp - 40, window_centre_y - 40);
      }
      
@@ -2923,9 +2923,9 @@ if (actor[player[2].actor_controlled].remote_control != REMOTE_NONE)
       circlefill(bmp_p2, cross_x + window_centre_x_2p, cross_y + window_centre_y, (200 - game_over) / 15, 176 + (200 - game_over) / 14); //arena[0].counter);
       */
       if (player[1].winner == 0)
-       display_game_writing(bmp_p1, 1, window_centre_x_2p, window_centre_y, 20 + (video_mode == 1) * 20);
+       display_game_writing(bmp_p1, 1, window_centre_x_2p, window_centre_y, 20 + (video_mode >= 1) * 20);
         else
-         display_game_writing(bmp_p1, 0, window_centre_x_2p, window_centre_y, 20 + (video_mode == 1) * 20);
+         display_game_writing(bmp_p1, 0, window_centre_x_2p, window_centre_y, 20 + (video_mode >= 1) * 20);
      }
 
      if (game_over != 0
@@ -2934,9 +2934,9 @@ if (actor[player[2].actor_controlled].remote_control != REMOTE_NONE)
 //      && user[player[2].user].lives == 0))
      {
       if (player[2].winner == 0)
-       display_game_writing(bmp_p2, 1, window_centre_x_2p, window_centre_y, 20 + (video_mode == 1) * 20);
+       display_game_writing(bmp_p2, 1, window_centre_x_2p, window_centre_y, 20 + (video_mode >= 1) * 20);
         else
-         display_game_writing(bmp_p2, 0, window_centre_x_2p, window_centre_y, 20 + (video_mode == 1) * 20);
+         display_game_writing(bmp_p2, 0, window_centre_x_2p, window_centre_y, 20 + (video_mode >= 1) * 20);
      }
      
     }
