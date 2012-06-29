@@ -3,11 +3,11 @@ CFLAGS = -g
 
 OS     = $(shell uname)
 
-#ifeq ($(OS), Linux)
-LDFLAGS = -lalleg -lnet -lm
-#else
-#	LDFLAGS = -lallegro -L ./ -lnet -lm
-#endif
+ifeq ($(OS), Linux)
+	LDFLAGS = -lalleg -lnet -lm
+else
+	LDFLAGS = -lallegro -L ./ -lnet -lm
+endif
 
 
 all: CaptPorksRevenge
