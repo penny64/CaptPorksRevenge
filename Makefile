@@ -1,10 +1,13 @@
 CC     = gcc
 CFLAGS = -g
-ifeq ($(UNAME), Linux)
-	LDFLAGS = -lalleg -lnet -lm
-else
-	LDFLAGS = -lallegro -L ./ -lnet -lm
-endif
+
+OS     = $(shell uname)
+
+#ifeq ($(OS), Linux)
+LDFLAGS = -lalleg -lnet -lm
+#else
+#	LDFLAGS = -lallegro -L ./ -lnet -lm
+#endif
 
 
 all: CaptPorksRevenge
