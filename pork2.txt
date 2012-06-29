@@ -1,0 +1,807 @@
+Captain Pork's Revenge
+Version 1.0
+The sequel to Captain Pork's World of Violence
+
+
+A game by Captain Pork (Copyright 2003 Captain Pork)
+Produced using the DJGPP compiler and the RHIDE interface. Graphics 
+made with the GIMP and displayed with the Allegro game programming 
+library by Shawn Hargreaves et al, which also does sound and various 
+other things. Networking through Libnet by George Foot et al.
+
+Thanks to:
+- Jek for playtesting and various suggestions
+- The Prof for putting up with my devotion to my art
+- The various people who responded to my Libnet question in 
+comp.os.msdos.djgpp
+- Anyone who's ever contributed to any of the software used in the 
+production of this game.
+
+Captain Pork's Revenge is distributed under the terms of the General Public Licence (GPL) - see the file LICENCE.TXT. It comes with no warranty, express or implied, and no liability is accepted for any harm it may do to you or your computer. In the unlikely event that it injures you somehow, contact your MP or other local representative. Read the licence for more information.
+
+The source code should be available from users.olis.net.au/~zel/
+If it's not there, try contacting captainpork@fastmail.fm to find out 
+where it's gone.
+
+Contents -
+
+1. Introduction
+2. Getting Started
+3. Configuring Keys
+4. Player Configuration
+5. Options
+6. Quickstart Menu
+7. Classes & Weapons
+8. The Setup Game menu
+9. Weapons & Equipment
+10. Networked Games
+11. Modifying the game
+
+
+**************************
+1. Introduction
+**************************
+
+Captain Pork's Revenge is a side-view platform game in the 
+style of Molez and Liero. It can be played against computer opponents, 
+against another human using a split screen, against other humans on 
+other computers connected to yours via null-modem cable (or possibly 
+over an IPX network, but this is experimental), or any combination of 
+the above.
+
+Basically you're a person, robot or strange creature walking or otherwise travelling around an enclosed arena full of dirt, rocks and useful objects. Unfortunately there are other people, robots and strange creatures in this arena - people, robots and strange creatures who don't like you. They may even try to kill you. You should kill them first, but they'll keep coming back until they run out of lives.
+
+Revenge is a sequel to my last game, Captain Pork's World of Violence. Revenge has many enhancements over the previous version, like dynamic light sourcing, new sprites, transparency, a slightly more user-friendly interface and all sorts of other little things that you may or may not notice. It also has a new experimental IPX mode which is more likely to work than the old one.
+
+
+System requirements:
+
+ - Minimum
+P200
+32MB RAM
+
+That's the tested minimum, although it will probably work on a less 
+powerful computer - I just haven't had the chance to test it on eg a 
+computer with 16MB RAM. You'll probably want something better, though, 
+so that you can run in 640x480 mode with a decent framerate.
+
+- Recommended
+P400 or better
+32MB RAM
+Some kind of sound card that Allegro can autodetect (probably most of 
+them)
+
+If the game refuses to load or just crashes, try changing your video 
+mode (320x200 should work on most monitors). If that doesn't fix the 
+problem, edit the proj.cfg file and change 
+Sound=1 
+to 
+Sound=0 
+It may be that the sound autodetection is refusing to work.
+
+
+**************************
+2. Getting Started
+**************************
+
+After loading the program you'll be asked which screen resolution you want. 640x480 looks much nicer and has an enhanced menu interface, but if you have a slower computer (say, a Pentium 200 or less) you may want to choose 320x200. The on-line help, which gives a brief description of what each menu item does, only operates in 640x480.
+
+The next thing you'll need to do is set up your controls under the 'Define Keys' menu (see 'Defining Keys' below). 
+
+Once you've done this, go to the 'Configure Players' menu to name yourself and choose a colour and team, and have a look at the 'Options' menu, which allows you to set a few interface options. 
+
+You can now go to the Quickstart menu and jump right in. You might like to start off with the Challenge mode, which presents you with several increasingly difficult levels to defeat. Or, if you have someone to play against, set the number of players to '2' and have a duel.
+
+If you want to fine-tune the game settings, go to the 'Setup Game' option (on the main menu), which allows you to designate everything from the names of the AI players to the speed of the bullets and the distribution of weapons found in boxes.
+
+
+**************************
+3. Configuring Keys
+**************************
+
+You can configure your controls in the menu accessible from the main 
+menu. The controls are as follows:
+
+ Left & Right - Moves you to the left or to the right.
+
+ Up & Down - Raises or lowers your firing angle.
+
+ Shoot - Fires the current weapon.
+
+ Jump - If you're standing on a solid surface, you jump up in the air. 
+Otherwise it activates your jetpack or rockets, if you have them. Either way it withdraws the grappling hook.
+
+ Change - Hold this key down and move left or right to change your 
+current weapon.
+
+ Grapple - Fires your grappling hook.
+
+ Score - Displays a list of players or teams with their current 
+scores.
+
+ Names - Toggles the display of player names on the screen.
+
+There are also a few composite commands:
+
+ Grapple - Hold the change key and press jump to activate the grapple 
+(same as the grapple command above, but for people who are used to 
+Liero).
+
+ Pick up - By holding the change key and pressing fire, you pick up 
+whatever you're standing on. You also use this to select your class 
+when you enter the game or are respawned.
+
+ Dig - While moving right, tap the left key to dig through dirt. The 
+same goes for left/right.
+
+You may notice that some combinations of keys don't like being pressed all at the same time, the exact combinations affected varying from computer to computer. This is a problem with most keyboards and there's no software workaround as far as I know.
+
+
+**************************
+4. Player Configuration
+**************************
+
+Choose your colours from the list of six or so. Enter your name (maximum 11 characters). Choose which team you belong to. And set your handicap - a handicap of less than 100 reduces the amount of health your player has proportionally (so a Walker robot with a handicap of 50 has 150 hit points: 50% of 300). You can't set your handicap above 100 (that wouldn't be fair).
+
+
+**************************
+5. Options
+**************************
+
+These options govern aspects of the interface.
+
+- Fuzzy Menu
+If the fuzziness of the menu is annoying you, turn it off here.
+
+- Screen Sync
+If this option is on, the game waits for the end of your monitor's 
+current vertical retrace before writing to the screen. This stops the 
+screen flickering but is slow, so turn it off if you want a better 
+framerate.
+
+- Cloud Transparency
+Setting this to Transparent makes the clouds and explosions transparent (thanks to Allegro's excellent transparency functions). Setting this to Stippled makes some of them stippled and some solid, and should improve framerate slightly. Setting it to Solid makes them all solid.
+
+- FPS Counter
+Displays the frames per second, ticks per second, and spare milliseconds per tick that the game is running at. Maximum FPS is 34.
+
+- Display Damage
+When someone gets hurt to a significant extent, a number comes up showing how much damage they took.
+
+- Positional Sound
+Puts sounds through the left or right speakers (or some of both) according to where they come from relative to the player. Doesn't work in splitscreen mode. You can reverse the speakers if necessary, and test the results.
+
+
+**************************
+6. Quickstart Mode
+**************************
+
+A menu which allows you to jump straight into the action. There are a few options in this menu which allow you to configure the quickstart game a little bit (for more flexibility use the setup game menus) and some different modes.
+
+**********
+6a. Challenge
+**********
+
+Takes a single player through a series of increasingly difficult levels. Some are free-for-alls, where each player is trying to score by killing any of the others. In some you will find all of the other people are on one team against you. You must win each round in order to advance to the next. If you lose a round you have to start again. Level 1 is an easy match against a snail called Norbert, but the later levels are much harder and the final level is very difficult. The various options don't apply to this game mode.
+
+**********
+6b. Duel, Melee, Team Melee and Last One Standing
+**********
+
+Duel pits Player 1 against an AI or Player 2. Scoring is by kills, with each self-kill losing 1 point. Melee throws the player(s) in with several vicious AIs. Team Melee does the same, except with two teams (players can be on the same or different teams). Last One Standing is similar to Melee, but you're ranked on how long you survive.
+
+Team Duel is a special mode for networked games which allows team play without adding AIs.
+
+
+**************************
+7. Classes & Weapons
+**************************
+
+**********
+7a. Classes
+**********
+
+Before you are transported into the arena you must choose what type of thing you want to be incarnated as. Depending on the game settings you will have some or all of the following options, which you select with the pickup command:
+
+
+- Soldier: A human soldier encased in heavy androgynous armour. The basic type.
+Hit Points: 100
+Mass: 250 aum
+Grapple springiness: 150 (the lower the better)
+Weapons: 3
+Clips per weapon: 3 (1 with 2 spare reloads)
+Walking Speed: 20 (acceleration 2.5)
+Weapons: Light Machine Gun, Grenade
+
+- Scout: A human soldier in lighter armour.
+Hit Points: 80
+Mass: 170 aum
+Grapple springiness: 140
+Weapons: 2
+Clips per weapon: 3
+Walking Speed: 25 (acceleration 3.5)
+Weapons: Light Machine Gun, Rocketpack
+
+- Cyborg: A part-human part-robot soldier. Heavier and slower than an unaugmented human.
+Hit Points: 140
+Mass: 400 aum
+Grapple springiness: 180
+Weapons: 3
+Clips per weapon: 4
+Walking Speed: 16 (acceleration 1.2)
+Weapons: Heavy Machine Gun, Fragmentation Grenade
+
+- Crusher: A cyborg with special robotic legs which allow it to wear heavier armour and carry more ordinance while slowing down only slightly.
+Hit Points: 170
+Mass: 600 aum
+Grapple springiness: 250
+Weapons: 3
+Clips per weapon: 5
+Walking Speed: 14 (acceleration 0.8)
+Weapons: Heavy Machine Gun, Mortar
+
+- Walker: As anyone familiar with modern computer games would be aware, giant fighting robots are the future of warfare. This is one of them, although it's just large rather than giant.
+Hit Points: 300
+Mass: 1000 aum
+Grapple springiness: 400
+Weapons: 4
+Clips per weapon: 5
+Walking Speed: 10 (acceleration 0.4)
+Weapons: Autocannon, Squirm Rockets
+
+- Bug: It is the goal of the space bugs to ensure that insect civilisation, not human, rules this galaxy, and as part of their plan they are learning how to fight with human weapons.
+Hit Points: 70
+Mass: 200 aum
+Grapple springiness: 150
+Weapons: 3
+Clips per weapon: 2
+Walking Speed: 28 (acceleration 5.0)
+Weapons: Swarm Rockets, Jetpack
+
+- Skeleton: A skeleton brought back from the dead through the use of necromancy. Animated skeletons are very light and fast, but their lack of connective tissue makes them highly vulnerable to damage.
+Hit Points: 60
+Mass: 100 aum
+Grapple springiness: 120
+Weapons: 2
+Clips per weapon: 2
+Walking Speed: 32 (acceleration 3.5)
+Weapons: Shotgun, Shredder
+
+- Demon: A minor demon from the pits of Hell.
+Hit Points: 70
+Mass: 130 aum
+Grapple springiness: 170
+Weapons: 2
+Clips per weapon: 2
+Walking Speed: 30 (acceleration 3.5)
+Weapons: Plasma Cannon, Fireball
+
+- Snail: The next generation of organisms genetically engineered for battle. The War Snail has a turret mounted on its shell that can fire weapons and a special heavy grappling hook. Its rubbery flesh is quite resistant to injury and delicious.
+Hit Points: 220
+Mass: 750 aum
+Grapple springiness: 300
+Weapons: 4
+Clips per weapon: 5
+Walking Speed: 13 (acceleration 2.5)
+Weapons: Plasma Rifle, Gas Grenade
+
+The 'Weapons' for each class are what it will get if the 'Weapons' option is set to 'Class'.
+
+The lighter you are, the more you get thrown around by impacts and the recoil from your own weapons. Heavier classes need extra-strong grappling hooks and ropes which don't fly as far.
+
+**********
+7b. Weapons & Equipment
+**********
+
+You might start out armed, but if you're not you can pick up the 
+weapons scattered around the level (depending on the game settings). 
+To do so, change weapons to the one you want to replace, or to an 
+empty slot, and use the pickup command (change + fire) to pick up a 
+box of weaponry. Equipment can be picked up in the same way, and it 
+also takes up a weapon slot. Medical kits (the red and white things) 
+which heal you can also be picked up.
+
+The green bar below the screen represents how healthy you are. Any 
+injuries you take reduce it. The yellow bar indicates how much 
+ammunition you have left, and the yellow boxes underneath that show 
+how many reloads you have left for your current weapon.
+
+
+**************************
+8. The Setup Game Menu
+**************************
+
+A collection of options and submenus which let you configure various 
+aspects of the game much more than the quickstart menu.
+
+The options are:
+ - Players
+How many players at the computer? (1 or 2)
+ - Teams
+If set to 'On', each player belongs to the team they've selected in 
+the player configuration menu. Teams share their score but not their 
+lives. Some game types (eg Capture the Flag) force this setting On.
+
+**********
+8a. Level Menu
+**********
+
+Allows you to set the parameters for generating the arena. The 
+following settings are available:
+
+- Style
+   - Classic - just rocks and dirt, in a tasteful colour scheme.
+   - Anything - rocks, dirt and walls.
+   - Platform - rocks, dirt and plenty of horizontal platforms.
+   - City - uneven ground with various platforms hanging the air.
+- Colours
+   - Classic - a nice set of browns and greys.
+   - Earth - A range of earthy tones.
+   - Crazy - usually ugly, always garish.
+- Dirt
+   - None - No dirt
+   - Full - Level completely full of dirt
+   - Tunnelled and Hollowed Out - some dirt
+- Earthquakes - earthquakes drop dirt into the level every now and then.
+- Solid Density - how many solid (undiggable) objects are there in the 
+level?
+- Height and Width - how large the level is, in pixels.
+- Ambient Light - a diffuse glow coming from the mysterious third dimension. If you set this to 'none', some areas of the level will be completely dark (no, you can't see into them by turning up the brightness on your monitor).
+- Lamps - places a number of bright lamps around the level. If set to 'regular' the lamps are arranged in an approximate grid pattern; otherwise they're just scattered randomly.
+
+Note: because of the complexity of the light-sourcing palette, it's no longer possible to load bitmaps in from disk. 
+
+**********
+8b. AI Config
+**********
+
+This is the menu you use to set up the AI players (bots). You can 
+choose their name (or leave blank and a random name will be chosen), 
+their team, their level of skill and a couple of other things. The skill 
+level affects their accuracy and aggressiveness. On the lowest setting they are a little slow and don't lead their targets. On the highest setting ('Really Smart') they are very accurate. AIs have an innate knowledge of the level layout, but they can't see other people hiding in complete darkness.
+
+In Captain Pork's Revenge (unlike World of Violence) AIs can play 
+any game mode, although as they aren't very good at navigating through
+complex levels they are better at supporting human players than working
+in AI-only teams.
+
+AIs don't cheat - they interface with the game in basically the same way as humans. The only real difference is that they can select weapon slots much more quickly. To help them out a little, you can set a few cheating options in this menu (at the bottom). You can protect them from any falling damage, give them unlimited ammunition, and give them access to all weapons available in the present game (which they choose from each time they respawn). They also prefer to play on wide levels rather than tall ones, and are easily confused by the presence of too many obstacles.
+
+
+**********
+8c. Custom Game Config
+**********
+
+You can change various game settings in the `Custom Game' menu. You 
+also have several slots for saved game configurations. Whenever you 
+select one of these, it replaces the current `custom game' settings 
+with its own.
+
+See the on-line help (available in 640x480 resolution) for more information about what each option does.
+
+
+**********
+8d. Game Types
+**********
+
+The following games are available:
+
+ - Kill Everything
+You get a point for every kill, and lose a point if you kill yourself. 
+Kill Everything can be played alone or in teams.
+
+ - Last One Standing
+The last one alive wins. Rankings are based on the order in which the 
+players or teams are eliminated, with score (number of kills) being 
+irrelevant.
+
+ - Hunt for Fruit
+An assortment of juicy and delicious fruit is scattered around the 
+level. Pick up (with the pickup command) a berry or small fruit for 1 
+point, a medium fruit for 3 or a large fruit for 5. The number of 
+fruit present at any time is set in the game configuration menu.
+
+ - Capture the Flag (must be played in teams)
+Capture your opponent's flag by picking it up, and bring it back to 
+your base when your own flag is there. If someone steals your flag, 
+kill them and pick up your flag to return it to your base. The team 
+scoring gets 2 points, the team whose flag was taken gets zero points 
+and everyone else gets one point. Once you've scored five times, your 
+base is moved around.
+* Note: Capture the Flag is currently unavailable in networked games.
+
+ - Quest for the Holy Grail (must be played in teams)
+The Grail lies somewhere on the level. Return it to your base to win 
+favour in the eyes of the Lord, who will then test you by taking it 
+away and leaving it somewhere else.
+
+ - Take and Hold (must be etc...)
+1-4 bases are placed in the level (choose how many in the game config 
+menu). You claim a base for your team by moving onto it and starting 
+it rotating. After about twenty-five seconds of rotating it gives you 
+a point. Players from other teams can claim it from you by moving onto 
+it when it's unguarded, resetting the countdown.
+
+<Porkball has been removed; it really wasn't worth it>
+
+**************************
+9. Weapons & Equipment
+**************************
+
+There are around 50 different weapons in the game. Most of them are 
+more or less balanced (although you can change the balance with 
+various of the game settings, like fast or exploding bullets), but 
+there are some weak ones tucked away at the end for use if, for 
+example, you want players to start out poorly armed. There are also a 
+few super-weapons, like the nuclear missile and the rectifier.
+
+You can set the availability of each of the weapons in the custom game menu. They can be turned off, in which case they'll never appear, they can be made available for choosing at the start of each game, and they can be rare or common in boxes (common weapons appear around four times as often as rare ones).
+
+Here's a list of the weapons, with a brief description of each:
+
+Autocannon
+Fires a series of heavy exploding shells.
+
+Blunderbuss
+A large, powerful shotgun. Fires a broad spray of pellets.
+
+Bouncy bomb
+Every time this annoying weapon bounces, it locks on to the nearest 
+person and chases them. This may be you, so watch out.
+
+C-Remote Rocket
+A remote controlled missile with corrected avionics which make it slow 
+but easy to use. Steer it with your left and right controls. Jump 
+causes you to relinquish control (useful if you're under attack) and 
+Fire makes it explode.
+
+Clod of Dirt
+Ever played Scorched Earth? This weapon explodes into a lump of dirt.
+
+Cube Rifle
+A plasma rifle modifed to produce multicoloured square bursts of plasma 
+instead of the usual blue round ones.
+
+Dirt Bomb
+Like the Clod, but takes a few seconds to explode into a larger lump 
+of dirt.
+
+Disrupter
+A nasty sonic weapon. On impact it releases a shock wave which passes 
+through walls for a short distance.
+
+Disrupter Wave
+A variant of the disrupter which fires a wave of intense vibrations which pass through solid objects and harm anything they get near.
+
+Fireball
+Shoots a ball of flame which bounces around exploding for a while.
+
+Firebomb
+A vessel which shatters on impact to release a shower of sticky 
+flames. Often best fired into a wall or ceiling.
+
+Flakker
+Fires a heavy shell which explodes in the air after a certain period 
+of flight. Good for taking out hovering jetpackers.
+
+Flamethrower
+Very effective at close range.
+
+Fragmentation Grenade
+A long-fused grenade wrapped in segmented metal. Releases a lot of 
+double-strength shrapnel (twice as harmful as the normal grey kind released by most other weapons).
+
+Fumigator
+Sprays clouds of a toxic, corrosive gas which eats through armour and
+flesh with equal ease.
+
+Funky bomb
+More Scorched Earth nostalgia. Multicoloured chemical warheads or 
+something.
+
+Gas Grenade
+Releases a cloud of toxic, corrosive gas. Deadly in a confined space.
+
+Grenade
+A basic grenade. While producing fewer pieces of ultra-jagged shrapnel 
+than the frag grenade, it has a more powerful blast.
+
+Heavy Machine Gun
+A basic high-calibre machine gun.
+
+Hunter-Seeker
+Shoots out a containment vessel which releases four deadly little 
+drones to hunt down anything that moves. They occasionally look around 
+to see who's closest, so keep well away once they get out. Very nasty.
+
+Implosion Device
+Creates a short-lived implosion field.
+
+Incendiaries
+A machine gun which fires incendiary bullets.
+
+Laser Beam
+Fires a low-output but still painful laser beam.
+
+Laser Pulse
+Fires a much more powerful laser beam, but can only maintain it for a 
+fraction of a second.
+
+Light Machine Gun
+A basic machine gun.
+
+Lightning Gun
+Fire bolts of electricity. A bit erratic, but powerful.
+
+LR Rocket
+A rocket launcher. Probably not as good as the other rocket launcher, 
+as it starts off moving slowly but accelerates.
+
+Mortar
+A mortar. Useful for firing over walls at enemy positions.
+
+Napalm Gun
+Sprays forth burning liquid.
+
+Nibbler
+Fires lots of small bullets very quickly.
+
+Nuclear Missile
+The ultimate weapon! A bit difficult to aim, but very effective if 
+used properly. Try standing still to fire it.
+
+Plasma Cannon
+An energy weapon which shoots out a ball of superhot plasma.
+
+Plasma Rifle
+A faster but less powerful version of the plasma cannon.
+
+Plinker
+Like a plasma cannon, but bouncy. If you can reliably use it to kill 
+anyone other than yourself you're doing better than me. It's fun, 
+though.
+
+Prongthrower
+Unleashes a hail of erratic little prongs.
+
+Rectifier
+A super plasma cannon. Only the nuke is more destructive.
+
+Remote Rocket
+Uncorrected version of the C-Remote Rocket. More difficult to steer, 
+but faster.
+
+Rocket Launcher
+Fires a rocket.
+
+Scattergun
+A small-bore automatic shotgun with a high rate of fire.
+
+Seeker Rocket
+A homing missile. Turns your normal targeting reticule into a radar 
+acquirement thing which locks on to whoever's closest to it. Once you 
+have your target you can fire and forget.
+
+Shotgun
+Your basic shotgun.
+
+Shredder
+Fires out several small and extremely sharp spinning blades.
+
+Slug Gun
+Fires a very heavy depleted uranium slug.
+
+Smiter
+Causes a large explosion wherever you point it.
+
+Swarm Rockets
+Lots of little rockets. They're good at long range, when they've had a 
+chance to accelerate.
+
+Squirm Rockets
+Lots and lots of littler rockets which go everywhere.
+
+Tracker Rocket
+A corrected-flight seeker.
+
+Toxin Grenade
+On explosion releases dozens of globules of highly corrosive toxin. 
+Can make a large area uninhabitable for a while.
+
+--- Weak Weapons
+
+Bomb
+A weak and unpredictable grenade.
+
+Grapeshot
+A very light shotgun which fires little pellets.
+
+Needler
+A weak flechette gun.
+
+RPG
+A weak and unpredictable rocket propelled grenade.
+
+Semi-Automatic
+Not very effective.
+
+--- Equipment
+
+Cloak
+Makes you almost invisible, although shooting uncloaks you for a few 
+seconds.
+
+Bubble Shield
+Surrounds you in a transparent bubble of force which reduces the 
+damage you suffer from each bullet, explosion etc by a small and 
+unpredictable amount. Makes you almost immune to things like 
+shotgun pellets, nibbler bullets or shrapnel, but heavier things punch 
+right through it.
+
+Jetpack
+A jetpack which lets you fly. To activate it, just hold 
+down the jump key. The jet takes a second or so to spin up to full 
+power, and if you run it too long it will overheat and give reduced 
+lift until it has a chance to cool down. The jetpack is easy to get 
+the hang of, but the spin-up time can be fatal if you're trying to get 
+out of trouble quickly.
+
+Regenerator
+Slowly heals or repairs you.
+
+Rocketpack
+Rockets which let you jump extra far when in the air. Press
+jump to use them. You can't carry both the jetpack and the
+rocketpack at the same time.
+
+Shadow Field
+Absorbs and deflects light to create an area of inky blackness around
+you. Does nothing if dynamic light sourcing is disabled.
+
+Soft Shield
+Softens impacts and dissipates some of the injury you sustain
+from various sources. All damage you take is halved. The Soft Shield
+is incompatible with the Bubble Shield, so if you try to pick up one
+when you already have the other, the one you have will be replaced.
+
+Spotlight
+Shines a narrow beam of bright light in whichever direction you're
+pointing. Does nothing if dynamic light sourcing is disabled.
+
+
+**************************
+10. Networked Games
+**************************
+
+Null-Modem linkups through your computer's serial ports are supported, 
+allowing you to play with up to four players on two computers. It's a 
+little bit complicated getting them to work, though.
+
+First, plug the computers together with your null modem cable (you may 
+want to turn your computers off first). Don't ever plug both ends of 
+the same cable into a single computer or you will hurt it.
+
+Next, edit the file libnet.cfg in the game directory of each computer. 
+There should be a line looking something like this
+Autoports 0 1
+If you're using COM1 on that computer, change it to autoports 0. If 
+COM2, change to autoports 1. If you don't know, you could leave it as 
+autoports 0 1 but that may not work, so you'll have to use trial and 
+error.
+
+Now, load up Captain Pork's Revenge on both computers. 
+Clients should set up their players and key configurations, then go 
+straight to the netgame menu. Set the game type to 'join a game' and 
+the com port to whatever port your computer uses. In the netgame menu there are shortcuts to the 'Number of Players' and player team options, in case you want to change these.
+
+Meanwhile, the server sets up the game as you would for a single-
+computer game. Subject to the restrictions listed below, any options 
+can be changed. AI players can be added. After all this is done, the server should go to the netgame menu, select 'host a game' and set the com port appropriately. Now select 'wait for connections'.
+
+When the server is waiting, the clients should (one at a time) select 
+'join game' or 'establish connection' or whatever it's called, I 
+forget. When all clients have joined, the server should start the game 
+as normal (and change any game settings that you forget to change before). This can be done either through the Setup Game menu or the Quickstart menu. If you want a human-only game, choose Duel or Team Duel modes under Quickstart, as the other modes add AIs.
+
+When the game is over, you go back and do it all again as above.
+
+ - Restrictions in networked games
+Unfortunately I'm not a very good programmer, and this is my first 
+attempt at multiplayer code (have a look in async.c for something scary). So there are a few features which are not available in networked games:
+    - Dirt. Sorry, but this is difficult to get right in theory, let 
+alone in practice. Whenever you start a networked game, dirt is set to 'None' and earthquakes to 'Off'.
+    - Capture the Flag (play Holy Grail or Take & Hold instead)
+    - Certain weapons: Clod of Dirt, Dirt Bomb and Hunter-Seekers are 
+all disabled. Laser beam is available but doesn't work very well.
+    - Only the server can add AI players.
+I've seen a null-modem game crash a computer, but that was a P150 running at 640x480 acting as a client in a game with 2 humans and 7 AIs, so I wasn't particularly surprised. More reasonable set-ups should be stable.
+
+Ways to improve performance by reducing bandwidth:
+   - Take out AIs (these use as much bandwidth as human players)
+   - Take out all pickups (weapon boxes etc)
+   - Take out smart weapons (trackers, seekers, bouncy bombs and 
+remote missiles)
+
+ - Experimental modes:
+   - Three-computer null-modem
+If your server computer has two available serial ports, you can try 
+plugging two other computers into it. Edit libnet.cfg to include this 
+line:
+autoports 0 1
+and connect with each client computer as above (the server should 
+change the com port setting between waiting for connections from each 
+client). This mode doesn't work very well on my computers (apparently 
+due to a limitation in Libnet, according to a number of posters to 
+comp.os.msdos.djgpp), but if yours have different IRQ settings for their serial ports you may have better luck. 
+
+   - IPX
+This mode is completely experimental, as I don't have access to a LAN 
+to test it out on. As far as I know it might damage your network or 
+interrupt your city's power supply. However, I think it's more likely to work than the mode in World of Violence, which was just too optimistic.
+
+Basically, you set up as for a serial connection. Instead of specifying a com port, however, the server just goes to 'Wait for Connections'. The clients must manually enter the server's network address in the Add: item before they connect. This address should be displayed when the server is waiting.
+
+Make sure that only one client is trying to connect at a time (I'm not sure how many clients are supported; probably around 4), and reselect the 'wait for connections' item on the server for each client once the previous one has established contact. You shouldn't have to worry about libnet.cfg.
+
+If this doesn't work, try leaving the first or last portions (before or after the colons) of the address off, in various combinations.
+If anyone does actually get this working, please contact me! (at captainpork@fastmail.fm) If anyone knows a bit about Libnet and IPX 
+and wants to help make this into a non-experimental mode, also please 
+contact me.
+
+   - Other modes (UDP/IP etc)
+It shouldn't be *too* difficult to add UDP/IP support (allowing play over the Internet or any other IP network) as Libnet already has UDP drivers for Windows. However, I have no way of testing this mode so I haven't even tried. If you're interested in adding support for UDP or any other protocol, please contact me.
+
+
+**************************
+11. Modifying the Game
+**************************
+
+Captain Pork's Revenge is highly configurable through the 
+game config menus, but has little other support for modifications 
+unless you want to mess around with source code. One thing you can do 
+reasonably easily is edit the sprites used for the little people, 
+provided that you have a decent graphics program (I use the GIMP, 
+which is free) and a lot of patience for pixel-by-pixel mousework.
+To do this, open the <class name>.bmp file. You will notice that each box is a different frame of animation; it's not too hard to work out what each one does except that the first leg frame is the standing still frame and the last frame is the jumping frame.
+
+The picture you see on the screen is assembled more or less like this:
+- The current leg animation frame is blitted to the screen. If you're 
+facing left, the sprite is flipped horizontally. For the Snail, this step happens last.
+- The backpack frame is blitted in, also flipped if facing left.
+- The body frame is blitted, flipped if necessary (meaning that the 
+soldiers look oddly ambidextrous).
+(Actually it's double-buffered and some assembly is done beforehand, 
+but you get the idea)
+
+Some notes about colour also need to be added here. Captain Pork runs 
+in 8-bit 256 colour mode with only 32 colours available for sprites (the rest are used for transparency and lightsourcing), so forget about fancy airbrushing or anti-aliasing! You may be able to extract the indexed palette from the soldier.bmp file, but if you can't the palette is included in palette.bmp. Just use these colours to make your new pictures. Black (R:0, G:0, B:0; index 224 and below) is the transparency colour. 
+
+Some pixels are special control pixels. These are:
+ - The pixels almost at the top left corner of the bitmap, inside the first partial box. There should be two pixels of very dim colours here, which I think are red and green for all the classes. These specify which colours are to be replaced by the player's colours or the player's team colour (If red and green, all the red in the sprites is replaced by various shades of colour 1, and all the green by various shades of colour 2).
+ - The pixels at the top left of each frame of legs walking. Red means that the body will be drawn one pixel lower when the legs are at this frame. Blue means one pixel higher.
+
+If your image editor doesn't support indexed palettes (I couldn't get it to work in Photoshop) you can use the eyedropper or equivalent to transfer colours from palette.bmp. The RGB values must be exact.
+
+If you manage to produce a nice set of sprites, email them to me and I'll put them in any future releases there happen to be.
+
+
+* Source code *
+
+So much for the easy part. If you want to mess around with source 
+code, keep in mind that I'm not a very good programmer (I taught 
+myself C after learning Commodore 64 BASIC - at least I don't use 
+gotos any more). The following things are needed to compile Captain 
+Pork's source code:
+
+- DJGPP version 2 or above
+- The Allegro low-level game routines library by Shawn Hargreaves et 
+al.
+- The Libnet networking library by George Foot et al (you could do 
+without Libnet by commenting out all references to it). Despite 
+references to it in some comments, you don't need DZCOMM (a serial 
+port library) as I replaced it with Libnet.
+
+Just compile everything and link it all with -lalleg and -lnet. main() 
+is in proj.c, along with an index to all source files.
+
+Good luck! If you have any questions, I may be contactable at captainpork@fastmail.fm, but then again I may not be depending on when you are reading this.
