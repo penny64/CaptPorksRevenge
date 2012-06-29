@@ -42,7 +42,7 @@ This file contains:
 #include "prand.h"
 #include "bullet.h"
 #include "objhead.h"
-#include "async.h"
+//#include "async.h"
 #include "light.h"
 
 #define PICKUP_TYPES 4
@@ -403,11 +403,11 @@ int create_pickup(int pickup_type, int contains, int pickup_x, int pickup_y,
     else
      pickup[pcount].wait_clear = wait_clear;
 
-   if (serial[0].game_type == SERIAL_SERVER)
-   {
-    async_pickup(pcount, pickup_type, contains, pickup_x, pickup_y, timeout,
-     pickup[pcount].wait_clear);
-   }
+   //if (serial[0].game_type == SERIAL_SERVER)
+   //{
+   // async_pickup(pcount, pickup_type, contains, pickup_x, pickup_y, timeout,
+   //  pickup[pcount].wait_clear);
+   //}
 
    pickup[pcount].pickup_type = pickup_type;
    pickup[pcount].contains = contains;

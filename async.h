@@ -6,7 +6,7 @@ void async_user_shoots(int shuser, int shactor, int wpn_fired);
 
 
 void async_client_join(void);
-int async_new_client(char *client_address, NET_CHANNEL *cl_channel);
+//int async_new_client(char *client_address, NET_CHANNEL *cl_channel);
 void async_init_clients(void);
 void async_client_get_clients(void);
 

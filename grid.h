@@ -1,3 +1,5 @@
+#include <allegro.h>
+
 unsigned char get_grid(int grid_x, int grid_y);
 unsigned char get_specific_grid(int grid_x, int grid_y);
 void set_grid(int grid_x, int grid_y, int to_grid);

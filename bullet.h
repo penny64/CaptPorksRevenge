@@ -22,6 +22,3 @@ int team_colours(int which_team);
 void actor_die(int dactor, int cause);
 int hurt_actor(int hactor, int hurter, int harm, int shielded, int force, int async);
 int bullet_rand(int rbull, int max);
-
-
-

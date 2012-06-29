@@ -1,3 +1,5 @@
+#include <allegro.h>
+
 void display_windows(BITMAP *bmp_p1, BITMAP *bmp_p2);
 void init_cloud_pattern(void);
 void init_object_sprites(void);

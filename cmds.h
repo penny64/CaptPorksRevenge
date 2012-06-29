@@ -72,3 +72,6 @@ int pickup_game_thing(int ractor, int pcount, int async);
 void actor_grapple(int sactor);
 int discharge_weapon(int weapon_type, int x_pos, int y_pos, int x_speed, int y_speed, int owner, int spread_mult, float angle, int seed, int async, int lock);
 
+#ifndef PI
+#define PI 3.14159265358979323846
+#endif

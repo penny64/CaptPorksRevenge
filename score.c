@@ -45,7 +45,7 @@ This file contains:
 #include "objhead.h"
 #include "sound.h"
 #include "base.h"
-#include "async.h"
+//#include "async.h"
 #include "connect.h"
 #include "misc.h"
 #include "chall.h"
@@ -253,8 +253,8 @@ void score_event(int sactor, int event, int event2)
   }
  }
 
- if (game_over == 200 && serial[0].game_type == SERIAL_SERVER)
-  async_end_game(0);
+ //if (game_over == 200 && serial[0].game_type == SERIAL_SERVER)
+ // async_end_game(0);
 
 }
 
@@ -301,8 +301,8 @@ void lose_life(int lactor)
        }
        if (found <= 1 && game_over == 0)
        {
-        if (serial[0].game_type == SERIAL_SERVER)
-         async_end_game(0);
+        //if (serial[0].game_type == SERIAL_SERVER)
+        // async_end_game(0);
         game_over = 200;
        }
       }
@@ -331,8 +331,8 @@ void lose_life(int lactor)
   }
   if (found <= 1 && game_over == 0)
   {
-   if (serial[0].game_type == SERIAL_SERVER)
-    async_end_game(0);
+   //if (serial[0].game_type == SERIAL_SERVER)
+   // async_end_game(0);
    game_over = 200;
   }
  }
@@ -351,10 +351,10 @@ void score_message(int stype, int user1, int user2, int async)
    char fstring [150];
 
 
-   if (serial[0].game_type == SERIAL_SERVER)
-   {
-    async_score_message(stype, user1, user2);
-   }
+   //if (serial[0].game_type == SERIAL_SERVER)
+   //{
+   // async_score_message(stype, user1, user2);
+   //}
 
 /*   if (serial[0].game_type == SERIAL_CLIENT)
    {
@@ -521,7 +521,7 @@ void end_game(int fade_speed)
  if (arena[0].qstart != QSTART_NONE)
   end_qstart();
 
-    shutdown_network();
+    //shutdown_network();
 
 // fade_in(*palet, fade_speed);
 // set_palette(*palet);
@@ -532,7 +532,7 @@ void end_game(int fade_speed)
 
  clear_keybuf();
 
- net_init();
+ //net_init();
 
 }
 

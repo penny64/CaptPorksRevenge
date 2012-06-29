@@ -31,6 +31,7 @@ This file contains:
  
 */
 
+#include <allegro.h>
 
 // dimensions of playing area, in GRID_WIDTH_ units
 //  -- probably not used any more

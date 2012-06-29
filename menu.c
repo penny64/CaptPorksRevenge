@@ -41,7 +41,7 @@ This file contains:
 #include "config.h"
 #include "globvar.h"
 
-#include "connect.h"
+//#include "connect.h"
 #include "menulist.h"
 #include "cmds.h"
 #include "sound.h"
@@ -51,6 +51,10 @@ This file contains:
 #include "chall.h"
 
 #include "grabhead.h"
+
+#ifndef PI
+#define PI 3.14159265358979323846
+#endif
 
 extern volatile char ticked;
 
@@ -143,12 +147,18 @@ void run_menus(int starting_menu)
     screen_width = 320;
     screen_height = 200;
   }
-     else
-     {
-      menu_screen = create_bitmap(640, 480);
-      screen_width = 640;
-      screen_height = 480;
-     }
+  else if (video_mode == 1)
+  {
+    menu_screen = create_bitmap(640, 480);
+    screen_width = 640;
+    screen_height = 480;
+  }
+  else if (video_mode == 2)
+  {
+    menu_screen = create_bitmap(800, 600);
+    screen_width = 800;
+    screen_height = 600;
+  }
  }
 
 
@@ -173,6 +183,33 @@ void run_menus(int starting_menu)
 
  destroy_bitmap(menu_screen);
 
+}
+
+char* my_my_itoa(int value, char* str, int radix) {
+    static char dig[] =
+        "0123456789"
+        "abcdefghijklmnopqrstuvwxyz";
+    int n = 0, neg = 0;
+    unsigned int v;
+    char* p, *q;
+    char c;
+
+    if (radix == 10 && value < 0) {
+        value = -value;
+        neg = 1;
+    }
+    v = value;
+    do {
+        str[n++] = dig[v%radix];
+        v /= radix;
+    } while (v);
+    if (neg)
+        str[n++] = '-';
+    str[n] = '\0';
+
+    for (p = str, q = p + (n-1); p < q; ++p, --q)
+        c = *p, *p = *q, *q = c;
+    return str;
 }
 
 
@@ -469,11 +506,11 @@ do
      toggle_option(cmenu[menu_count].entry_index, 1);
      break;
      case RESPONSE_START_GAME:
-      if (serial[0].game_type != SERIAL_LOCAL_ONLY)
-      {
-        serial_game_init();
-        conn_to_channel();
-      }
+   //   if (serial[0].game_type != SERIAL_LOCAL_ONLY)
+   //   {
+   //     serial_game_init();
+   //     conn_to_channel();
+   //   }
           player_weapons[1] = 1;
           player_weapons[2] = 1;
            if (game[0].starting_weapons == 2)
@@ -502,9 +539,9 @@ do
      case RESPONSE_QUICKSTART:
           menu_quickstart(cmenu[menu_count].entry_index);
           return;
-     case RESPONSE_SHUTDOWN_CONNECT:
-          shutdown_network();
-          break;
+  //   case RESPONSE_SHUTDOWN_CONNECT:
+  //        //shutdown_network();
+  //        break;
      case RESPONSE_CHOOSE_ATYPE:
       if (player_choose_atype(cmenu[menu_count].entry_index))
       {
@@ -585,35 +622,35 @@ do
      case RESPONSE_ENTER_SERVER_ADDRESS:
       get_server_address(cmenu[menu_count].entry_index, menu_offset, menu_count);
       break;
-     case RESPONSE_CONNECT:
-      if (serial[0].initialised == 0)
-       init_serial_port(serial[0].com_port);
-      switch(serial[0].game_type)
-      {
-       case SERIAL_SERVER:
-       server_get_connections();
-       break;
-       case SERIAL_CLIENT:
-       if (client_connect() == -1)
-       {
-        rest(1000);
-        break;
-       }
-       rest(1000);
-       menu_information_box("Connection Established.", " ", "Waiting for server to start...", 0);
-       serial_game_init();
-       player_weapons[1] = 1;
-       player_weapons[2] = 1;
-       if (game[0].starting_weapons == 2) player_weapons[1] = 4;
-       if (game[0].starting_weapons == 2) player_weapons[2] = 4;
-       if (game[0].starting_weapons == 0
-           || game[0].starting_weapons == 3)
-            cmenu = NULL;
-             else
-              cmenu = weapon_menu;
-       return;
-      }
-      break;
+   //  case RESPONSE_CONNECT:
+   ////   if (serial[0].initialised == 0)
+   ////    init_serial_port(serial[0].com_port);
+   //   switch(serial[0].game_type)
+   //   {
+   //    case SERIAL_SERVER:
+   //    server_get_connections();
+   //    break;
+   //    case SERIAL_CLIENT:
+   //    if (client_connect() == -1)
+   //    {
+   //     rest(1000);
+   //     break;
+   //    }
+   //    rest(1000);
+   //    menu_information_box("Connection Established.", " ", "Waiting for server to start...", 0);
+   //    serial_game_init();
+   //    player_weapons[1] = 1;
+   //    player_weapons[2] = 1;
+   //    if (game[0].starting_weapons == 2) player_weapons[1] = 4;
+   //    if (game[0].starting_weapons == 2) player_weapons[2] = 4;
+   //    if (game[0].starting_weapons == 0
+   //        || game[0].starting_weapons == 3)
+   //         cmenu = NULL;
+   //          else
+   //           cmenu = weapon_menu;
+   //    return;
+   //   }
+   //   break;
 //     case RESPONSE_INIT_CONNECT:
 //      break;
       
@@ -734,7 +771,7 @@ void menu_quickstart(int which_entry)
    switch(which_entry)
    {
        case ENTRY_CHALLENGE:
-          shutdown_network();
+          //shutdown_network();
           arena[0].challenge_level = 1;
           player_weapons[1] = 1;
           no_players = 1;
@@ -797,11 +834,11 @@ void menu_quickstart(int which_entry)
           } else
            cmenu = weapon_menu;
            
-          if (serial[0].game_type != SERIAL_LOCAL_ONLY)
-          {
-            serial_game_init();
-            conn_to_channel();
-          }
+    //      if (serial[0].game_type != SERIAL_LOCAL_ONLY)
+    //      {
+    //        serial_game_init();
+    //        conn_to_channel();
+    //      }
 
 
 }
@@ -894,7 +931,7 @@ void save_config(int which_option)
   break;
   case ENTRY_SAVE_GAME:
   strcpy(miscstring, "Game");
-  strcat(miscstring, itoa(game_being_edited, itstring, 10));
+  strcat(miscstring, my_itoa(game_being_edited, itstring, 10));
   set_config_string(miscstring, "Name", game[game_being_edited].gname);
   set_config_int(miscstring, "gravity", game[game_being_edited].gravity);
   set_config_int(miscstring, "health_amount", game[game_being_edited].health_amount);
@@ -931,14 +968,14 @@ void save_config(int which_option)
   for (wcount = 0; wcount < NO_WEAPONS; wcount ++)
   {
    strcpy(wstring, "Wpn");
-   strcat(wstring, itoa(wcount, itstring, 10));
+   strcat(wstring, my_itoa(wcount, itstring, 10));
    set_config_int(miscstring, wstring, game[game_being_edited].weapon_status [wcount]);
   }
 
   for (wcount = 0; wcount < NO_EQUIP; wcount ++)
   {
    strcpy(wstring, "Eqp");
-   strcat(wstring, itoa(wcount, itstring, 10));
+   strcat(wstring, my_itoa(wcount, itstring, 10));
    set_config_int(miscstring, wstring, game[game_being_edited].equip_status [wcount]);
   }
 
@@ -949,7 +986,7 @@ void save_config(int which_option)
   for (wcount = 0; wcount < MAX_AI; wcount ++)
   {
    strcpy(miscstring, "AI-");
-   strcat(miscstring, itoa(wcount, itstring, 10));
+   strcat(miscstring, my_itoa(wcount, itstring, 10));
    set_config_string(miscstring, "Name", ai_config[wcount].name);
    set_config_int(miscstring, "Active", ai_config[wcount].active);
    set_config_int(miscstring, "Skill", ai_config[wcount].skill);
@@ -1194,12 +1231,12 @@ void toggle_option(int which_option, char tdir)
   case ENTRY_COM_PORT:
   serial[0].com_port = cycle_value(serial[0].com_port, 1, 2, tdir);
   break;
-  case ENTRY_CONNECTION_TYPE:
-  if (serial[0].connection_type == NET_DRIVER_IPX_DOS)
-   serial[0].connection_type = NET_DRIVER_SERIAL_DOS;
-    else
-     serial[0].connection_type = NET_DRIVER_IPX_DOS;
-  break;
+  //case ENTRY_CONNECTION_TYPE:
+  //if (serial[0].connection_type == NET_DRIVER_IPX_DOS)
+  // serial[0].connection_type = NET_DRIVER_SERIAL_DOS;
+  //  else
+  //   serial[0].connection_type = NET_DRIVER_IPX_DOS;
+  //break;
   case ENTRY_WHO_DAMAGE:
   serial[0].who_decides_damage = cycle_value(serial[0].who_decides_damage, 0, 2, tdir);
   break;
@@ -1870,10 +1907,10 @@ strcat(mstring, mentry[mcount].entry_name);
       append_colour_name(mstring, player[2].colour2);
       break;
       case ENTRY_HANDICAP1:
-      strcat(mstring, itoa(player[1].handicap, itstring, 10));
+      strcat(mstring, my_itoa(player[1].handicap, itstring, 10));
       break;
       case ENTRY_HANDICAP2:
-      strcat(mstring, itoa(player[2].handicap, itstring, 10));
+      strcat(mstring, my_itoa(player[2].handicap, itstring, 10));
       break;
       case ENTRY_NAME2:
       strcat(mstring, player[2].pname);
@@ -2142,40 +2179,40 @@ strcat(mstring, mentry[mcount].entry_name);
       break;
       
       case ENTRY_GRAVITY:
-      strcat(mstring, itoa(game[game_being_edited].gravity, itstring, 10));
+      strcat(mstring, my_itoa(game[game_being_edited].gravity, itstring, 10));
       break;
       case ENTRY_HEALTH_AMOUNT:
-      strcat(mstring, itoa(game[game_being_edited].health_amount, itstring, 10));
+      strcat(mstring, my_itoa(game[game_being_edited].health_amount, itstring, 10));
       break;
       case ENTRY_RELOAD_TIME:
-      strcat(mstring, itoa(game[game_being_edited].reload_time, itstring, 10));
+      strcat(mstring, my_itoa(game[game_being_edited].reload_time, itstring, 10));
       break;
       case ENTRY_IMPACT:
-      strcat(mstring, itoa(game[game_being_edited].impact_damage, itstring, 10));
+      strcat(mstring, my_itoa(game[game_being_edited].impact_damage, itstring, 10));
       break;
       case ENTRY_PK_NUMBER:
-      strcat(mstring, itoa(game[game_being_edited].pk_number - 2, itstring, 10));
+      strcat(mstring, my_itoa(game[game_being_edited].pk_number - 2, itstring, 10));
       break;
       case ENTRY_FRUIT_NUMBER:
-      strcat(mstring, itoa(game[game_being_edited].fruit_no, itstring, 10));
+      strcat(mstring, my_itoa(game[game_being_edited].fruit_no, itstring, 10));
       break;
       case ENTRY_PENALTY:
       if (game[game_being_edited].penalty == 0)
        strcat(mstring, "None");
         else
          {
-          strcat(mstring, itoa(game[game_being_edited].penalty, itstring, 10));
+          strcat(mstring, my_itoa(game[game_being_edited].penalty, itstring, 10));
           strcat(mstring, " seconds");
          }
       break;
       case ENTRY_TH_BASE_NUMBER:
-      strcat(mstring, itoa(game[game_being_edited].th_base_no, itstring, 10));
+      strcat(mstring, my_itoa(game[game_being_edited].th_base_no, itstring, 10));
       break;
       case ENTRY_LEVEL_WIDTH:
-      strcat(mstring, itoa(arena[0].max_x, itstring, 10));
+      strcat(mstring, my_itoa(arena[0].max_x, itstring, 10));
       break;
       case ENTRY_LEVEL_HEIGHT:
-      strcat(mstring, itoa(arena[0].max_y, itstring, 10));
+      strcat(mstring, my_itoa(arena[0].max_y, itstring, 10));
       break;
       case ENTRY_GAME_TYPE:
       switch(game[game_being_edited].game_type)
@@ -2193,13 +2230,13 @@ strcat(mstring, mentry[mcount].entry_name);
       if (game[game_being_edited].lives_each == 0)
        strcat(mstring, "Unlimited");
         else
-         strcat(mstring, itoa(game[game_being_edited].lives_each, itstring, 10));
+         strcat(mstring, my_itoa(game[game_being_edited].lives_each, itstring, 10));
       break;
       case ENTRY_SCORE_LIMIT:
 //      if (game[game_being_edited].score_limit == 0)
 //       strcat(mstring, "Unlimited");
 //        else
-         strcat(mstring, itoa(game[game_being_edited].score_limit, itstring, 10));
+         strcat(mstring, my_itoa(game[game_being_edited].score_limit, itstring, 10));
       break;
       case ENTRY_PK_TIME_BETWEEN:
       switch(game[game_being_edited].pk_time_between)
@@ -2353,13 +2390,13 @@ strcat(mstring, mentry[mcount].entry_name);
       print_font = small_font;
       strcat(mstring, serial[0].port_string);
       break;
-      case ENTRY_CONNECTION_TYPE:
-      switch(serial[0].connection_type)
-      {
-       case NET_DRIVER_SERIAL_DOS: strcat(mstring, "Serial Ports"); break;
-       case NET_DRIVER_IPX_DOS: strcat(mstring, "IPX Network"); break;
-      }
-      break;
+      //   case ENTRY_CONNECTION_TYPE:
+      //   switch(serial[0].connection_type)
+      //   {
+      //    case NET_DRIVER_SERIAL_DOS: strcat(mstring, "Serial Ports"); break;
+      //    case NET_DRIVER_IPX_DOS: strcat(mstring, "IPX Network"); break;
+      //   }
+      //   break;
       case ENTRY_CONNECT:
       switch(serial[0].game_type)
       {
@@ -2634,7 +2671,7 @@ int ai_edited = ai_editing(which_option);
        colour = 109;
       break;
       case ENTRY_HANDICAP_AI1:
-      strcat(mstring, itoa(ai_config[ai_edited].handicap, itstring, 10));
+      strcat(mstring, my_itoa(ai_config[ai_edited].handicap, itstring, 10));
       if (ai_config[ai_edited].active == 0 && colour == 2)
        colour = 109;
       break;

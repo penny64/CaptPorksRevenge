@@ -35,7 +35,7 @@ This file contains:
 #include "config.h"
 #include "globvar.h"
 
-#include "conio.h"
+//#include "conio.h"
 #include "math.h"
 DATAFILE *soundf;
 

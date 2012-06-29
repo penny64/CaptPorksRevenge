@@ -615,10 +615,10 @@ for (i = 0; i < NO_USERS; i++)
 //          switch(actor[k].propulsion)
 //          {
 //           case PROP_GRAPPLE:
-             if (serial[0].game_type != SERIAL_LOCAL_ONLY)
-             {
-              async_user_shoots(actor[k].user, k, WPN_SHIELD);
-             }
+    //         if (serial[0].game_type != SERIAL_LOCAL_ONLY)
+    //         {
+    //          async_user_shoots(actor[k].user, k, WPN_SHIELD);
+    //         }
            actor_grapple(k); //break;
 //           case PROP_JET: toggle_jet(k); break;
 //           case PROP_ROCKETS: actor_rocket(k, 1); break;
@@ -722,7 +722,7 @@ void actor_replace_weapon(int ractor, int slot)
 /*    if (actor[ractor].weapon [find_duplicate] == WPN_ARMOUR)
     {
      actor[ractor].armour = actor[ractor].max_armour;
-     async_take_pickup(ractor, pcount);
+     //async_take_pickup(ractor, pcount);
      destroy_pickup(pcount);
      display_actor_health(ractor, 0);
      actor[ractor].prevent_pickup = 1;
@@ -813,7 +813,7 @@ void actor_replace_weapon(int ractor, int slot)
   actor[ractor].ammunition [slot] = 0;
   actor[ractor].clips [slot] = 0;
   actor[ractor].reload [slot] = 0;
-  async_take_pickup(ractor, pcount);
+  ////async_take_pickup(ractor, pcount);
   destroy_pickup(pcount);
   display_actor_ammunition(ractor);
   display_actor_clips(ractor);
@@ -869,7 +869,7 @@ void actor_replace_weapon(int ractor, int slot)
  actor[ractor].ammunition [slot] = wlist[pickup[pcount].contains].ammunition;
  actor[ractor].clips [slot] = actor[ractor].max_clips;
  actor[ractor].reload [slot] = 0;
- async_take_pickup(ractor, pcount);
+ ////async_take_pickup(ractor, pcount);
  destroy_pickup(pcount);
 
  display_actor_ammunition(ractor);
@@ -923,7 +923,7 @@ int pickup_game_thing(int ractor, int pcount, int async)
     }
     if (async == 0)
     {
-     async_take_pickup(ractor, pcount);
+     ////async_take_pickup(ractor, pcount);
      destroy_pickup(pcount);
      actor[ractor].prevent_pickup = 1;
     }
@@ -942,7 +942,7 @@ int pickup_game_thing(int ractor, int pcount, int async)
    display_actor_health(ractor, 0);
   }
   if (async == 0)
-   async_take_pickup(ractor, pcount);
+   ////async_take_pickup(ractor, pcount);
   destroy_pickup(pcount);
   actor[ractor].prevent_pickup = 1;
   play_sound_pos(WAV_HEALTH, 1000, 250, actor[ractor].x, actor[ractor].y);
@@ -956,7 +956,7 @@ int pickup_game_thing(int ractor, int pcount, int async)
    actor[ractor].has_grail = 1;
   }
   if (async == 0)
-   async_take_pickup(ractor, pcount);
+   ////async_take_pickup(ractor, pcount);
   destroy_pickup(pcount);
   actor[ractor].prevent_pickup = 1;
   return 1;
@@ -980,7 +980,7 @@ int pickup_game_thing(int ractor, int pcount, int async)
    if (actor[ractor].has_flag == -1)
    {
     if (async == 0)
-     async_take_pickup(ractor, pcount);
+     ////async_take_pickup(ractor, pcount);
     actor[ractor].has_flag = pickup[pcount].contains;
     team[actor[ractor].has_flag].flag_at_base = 0;
     score_message(SMESSAGE_HAS_FLAG, actor[ractor].user, actor[ractor].has_flag, 0);
@@ -990,7 +990,7 @@ int pickup_game_thing(int ractor, int pcount, int async)
    }
   } // end if ... != SERIAL_CLIENT
   if (async == 0)
-   async_take_pickup(ractor, pcount);
+   ////async_take_pickup(ractor, pcount);
 //  if (serial[0].game_type == SERIAL_CLIENT
 //      && )
 //  destroy_pickup(pcount);
@@ -1177,10 +1177,10 @@ int actor_shoot(int sactor, char async, int seed, int lock)
 
  if (success != -1)
  {
-    if (async == WPN_NONE && serial[0].game_type != SERIAL_LOCAL_ONLY)
-    {
-     async_user_shoots(actor[sactor].user, sactor, fired);
-    }
+ //   if (async == WPN_NONE && serial[0].game_type != SERIAL_LOCAL_ONLY)
+ //   {
+ //    async_user_shoots(actor[sactor].user, sactor, fired);
+ //   }
 
 
 /*    if (async != WPN_NONE)
@@ -1215,10 +1215,10 @@ int actor_shoot(int sactor, char async, int seed, int lock)
     || fired == WPN_SEEKER
     || fired == WPN_TRACKER)
     {
-     if (async == WPN_NONE && serial[0].game_type == SERIAL_SERVER)
-     {
-      async_smart_init(success, -1, fired);
-     }
+  //   if (async == WPN_NONE && serial[0].game_type == SERIAL_SERVER)
+  //   {
+  //    async_smart_init(success, -1, fired);
+  //   }
     }
       // display call assumes can't fire while change button pressed
  }
@@ -2225,7 +2225,7 @@ switch(actor[ractor].remote_control)
   {
    bullet[thc].fuse = 1;
    actor[ractor].recycle = 20;
-   async_smart_destroy(thc);
+   //async_smart_destroy(thc);
   }
   break;
   case CMD_JUMP:

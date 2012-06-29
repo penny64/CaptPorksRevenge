@@ -140,10 +140,10 @@ acthead.h is no longer linked to a datafile, but still controls the order
 #include "grabhead.h"
 #include "acthead.h"
 #include "prand.h"
-#include "connect.h"
+//#include "connect.h"
 #include "ai.h"
 #include "actor.h"
-#include "async.h"
+//#include "async.h"
 #include "chall.h"
 #include "palette.h"
 #include "light.h"
@@ -740,7 +740,7 @@ void init_people(int users, int game_type)
   }
  }
  
-   text_mode(0);
+   ////text_mode(0);
 
 }
 
@@ -783,7 +783,6 @@ void video_modes(void)
 
   max_menu_entries = 7;
   break;
-  case 2:
   case 1:
   window_x_sp = 655; // 640 - all these values are + 15 so that there's some
    // extra for distortion_mask to read from.
@@ -821,19 +820,44 @@ void video_modes(void)
 
   max_menu_entries = 12;
   break;
-/*  case 2:
-  window_x_sp = 800;
-  window_y = 500;
-  window_x_2p = 400;
-  window_grid_x_sp = 23;
-  window_grid_y = 26;
-  window_grid_x_2p = 12;
-  window_centre_x_sp = 14;
-  window_centre_x_2p = 7;
-  window_centre_y = 13;
-  window_2p_offset = 400;
-  crosshair_distance = 45;
-  break;*/
+  case 2:
+  window_x_sp = 655; // 640 - all these values are + 15 so that there's some
+   // extra for distortion_mask to read from.
+  window_y = 420; // + 10
+  window_x_2p = 335; // 320
+/*  window_grid_x_sp = 23;
+  window_grid_y = 22;
+  window_grid_x_2p = 12;*/
+  window_grid_x_sp = 690;
+  window_grid_y = 440;
+  window_grid_x_2p = 320; // 320
+  window_centre_x_sp = 330;
+  window_centre_x_2p = 180; // 180
+  window_centre_y = 200;
+  window_2p_offset = 180;
+  crosshair_distance = 30;
+  text_size = 20;
+
+  window_sp_offset = 330;
+
+  stat_x_pos = 10;
+  stat_y_pos = 400;
+  stat_bar_width = 10;
+  stat_pix_per_point_1p = 4;
+  stat_pix_per_point_2p = 2;
+  score_sp_x_pos = 630;
+  score_2p_x_pos = 310;
+  score_y_pos = 460;
+
+  map_sp_x = 580;
+  map_2p_x = 250;
+  map_y = 350;
+  map_width = 50;
+  map_height = 30;
+
+  max_menu_entries = 12;
+  
+  break;
  }
 
 }
@@ -854,7 +878,7 @@ int main(int argc, char *argv[])
 do
 {
 
-   init_async();
+   //init_async();
 
    init_everything_again1();
 
@@ -865,7 +889,7 @@ do
    init_people(2, 0);
 
    init_everything_again2();
-
+   
    init_cmds2();
 
    run_game();
@@ -962,7 +986,7 @@ void init_everything_once(void)
    init_cmds();
    init_ai_struct();
 
-   init_connect(); // in case we want to use a serial connection
+   //init_connect(); // in case we want to use a serial connection
 //   serial[0].connection_type = NET_DRIVER_SERIAL_DOS;
 
    key_led_flag = 0; // allows player to use these keys without the leds lighting up when they're pressed
@@ -991,32 +1015,29 @@ void init_everything_once(void)
    
 //   clrscr();
 
-   cprintf("\n\r\n\rWelcome to Captain Pork's Revenge (version 1.01)!");
-   cprintf("\n\r\n\rCaptain Pork's Revenge is free software");
-   cprintf("\n\r(you are welcome to redistribute it under certain");
-   cprintf("\n\rconditions) and comes with absolutely no warranty.");
-   cprintf("\n\rFor details read LICENCE.TXT.");
-   cprintf("\n\r\n\rPress 3 to start in 320x200 mode or any other key for 640x480.");
-   video_mode = 1;
-
+   printf("\n\r\n\rWelcome to Captain Pork's Revenge (version 1.01)!");
+   //printf("\n\r\n\rCaptain Pork's Revenge is free software");
+   //printf("\n\r(you are welcome to redistribute it under certain");
+   //printf("\n\rconditions) and comes with absolutely no warranty.");
+   //printf("\n\rFor details read LICENCE.TXT.");
+   //printf("\n\r\n\rPress 3 to start in 320x200 mode or any other key for 640x480.");
    init_config();
    init_sound();
-
-   do
-   {
-    globg ++;
-   } while (keypressed() == 0);
-   switch(readkey() & 0xff)
-   {
-    case '3': video_mode = 0; break;
-    case '8': video_mode = 2; break;
-   }
-   
+   globg ++;
+   //do
+   //{
+   // globg ++;
+   //} while (keypressed() == 0);
+   //switch(readkey() & 0xff)
+   //{
+   // case '3': video_mode = 0; break;
+   // case '8': video_mode = 2; break;
+   //}
+   video_mode = 1;
    init_prand(globg);
-
    video_modes();
    // NOTE: 800x600 not tested as my monitor doesn't like set_gfx_mode
-
+   
    set_color_depth(8);
 
    switch(video_mode)
@@ -1037,14 +1058,14 @@ void init_everything_once(void)
       exit(1);
     }
     break;
-/*    case 2:
+    case 2:
     if (set_gfx_mode(GFX_AUTODETECT, 800, 600, 0, 0) != 0)
     {
       set_gfx_mode(GFX_TEXT, 0, 0, 0, 0);
       allegro_message("Unable to set 800x600 mode\n%s\n", allegro_error);
       exit(1);
     }
-    break;*/
+    break;
 /*    case 3:
     if (set_gfx_mode(GFX_MODEX, 360, 360, 0, 0) != 0)
     {
@@ -1055,10 +1076,9 @@ void init_everything_once(void)
     break;*/
    }
 
-
 //   colour_table();
 
-   text_mode(-1);
+   ////text_mode(-1);
 
 
 //   palet = &palette_data;
@@ -1114,8 +1134,7 @@ void init_everything_once(void)
    save_bitmap("palette.bmp", pal_bmp, palet);
 */
    RGB temp_palette [256];
-
-   textprintf(screen, datf[FONT_01].dat, 10, 10, COLOUR_YELLOW4, "Loading...");
+   //textprintf(screen, datf[FONT_01].dat, 10, 10, COLOUR_YELLOW4, "Loading...");
 
    soldier_file [SOLDIER_SOLDIER] = load_bitmap("soldier.bmp", temp_palette);
 // soldier_file = create_bitmap(200, 700);//load_bitmap("soldier.bmp", temp_palette);
@@ -1672,9 +1691,9 @@ turn_init();
 void run_game(void)
 {
 
-   if (serial[0].game_type == SERIAL_SERVER ||
-        serial[0].game_type == SERIAL_CLIENT)
-          synch_gamestart();
+   //if (serial[0].game_type == SERIAL_SERVER ||
+   //     serial[0].game_type == SERIAL_CLIENT)
+   //       synch_gamestart();
 #ifdef DEBUG_KEYS
    static int scrshnum = 0;
    static int scount = 0;
@@ -1696,7 +1715,7 @@ if (key [KEY_P] && scount == 0)
  blit(screen, scrshot, 0, 0, 0, 0, 640, 480);
  char scr_name [20];
  strcpy(scr_name, "scrs\\scrs");
- strcat(scr_name, itoa(scrshnum, itstring, 10));
+ strcat(scr_name, my_itoa(scrshnum, itstring, 10));
  strcat(scr_name, ".bmp");
  RGB palt [256];
  get_palette(palt);
@@ -1717,7 +1736,7 @@ if (scount > 0) scount --;
       tick_status ++;
       if ((tick_status % frame_length == 0 && ticked == 0) || arena[0].counter % 30 == 0)
       {
-       text_mode(0);
+       ////text_mode(0);
 //       textprintf(screen, small_font, 100, 70, COLOUR_YELLOW1 + arena[0].counter % 4, "(%ims slack)", slacktime);
        display_windows(bmp_p1, bmp_p2);
        framecounter++;
@@ -1742,8 +1761,8 @@ if (scount > 0) scount --;
            break;
          }
          run_effects();
-         if (serial[0].game_type != SERIAL_LOCAL_ONLY)
-          run_async();
+   //      if (serial[0].game_type != SERIAL_LOCAL_ONLY)
+   //       run_async();
          enact_commands();
          run_actors();
          turncounter ++;
@@ -1779,14 +1798,14 @@ if (scount > 0) scount --;
 //       end_challenge();
        if (serial[0].game_type == SERIAL_SERVER)
        {
-        async_end_game(1);
+        //async_end_game(1);
         game_over = 200;
        }
         else
         {
          if (serial[0].game_type == SERIAL_CLIENT)
          {
-          async_end_game(1);
+          //async_end_game(1);
           game_over = 200;
          }
           else
@@ -1850,7 +1869,7 @@ for (i = 0; i < NO_ACTORS; i++)
 void init_grid(void)
 {
 
- textprintf(screen, large_font, 10, 10, COLOUR_YELLOW4, "Please wait, I'm thinking of a level for you...");
+ //textprintf(screen, large_font, 10, 10, COLOUR_YELLOW4, "Please wait, I'm thinking of a level for you...");
 
 // arena[0].level_type = LEVELTYPE_BRICKS;
 
@@ -2125,18 +2144,18 @@ int is_actor_lit(int i)
 
 void colour_table(const char *which_call)
 {
-   text_mode(0);
+   //text_mode(0);
 
    int bz;
    
    for (bz = 0; bz < 256; bz ++)
    {
-    textprintf(screen, small_font, (bz % 16) * 50, (bz / 16) * 20, bz, "%i.%i.%i.%i", bz, palet[bz].r, palet[bz].g, palet[bz].b);
+    //textprintf(screen, small_font, (bz % 16) * 50, (bz / 16) * 20, bz, "%i.%i.%i.%i", bz, palet[bz].r, palet[bz].g, palet[bz].b);
 //    textprintf(screen, font, (bz % 16) * 20, (bz / 16) * 20, bz, "%i", bz);
    }
 
-   text_mode(5);
-   textprintf(screen, large_font, 300, 200, 254, which_call);
+   //text_mode(5);
+   //textprintf(screen, large_font, 300, 200, 254, which_call);
 
 
    rest(5);
@@ -2148,17 +2167,42 @@ void colour_table(const char *which_call)
    readkey();
 }
 
+char* my_itoa(int value, char* str, int radix) {
+    static char dig[] =
+        "0123456789"
+        "abcdefghijklmnopqrstuvwxyz";
+    int n = 0, neg = 0;
+    unsigned int v;
+    char* p, *q;
+    char c;
+
+    if (radix == 10 && value < 0) {
+        value = -value;
+        neg = 1;
+    }
+    v = value;
+    do {
+        str[n++] = dig[v%radix];
+        v /= radix;
+    } while (v);
+    if (neg)
+        str[n++] = '-';
+    str[n] = '\0';
+
+    for (p = str, q = p + (n-1); p < q; ++p, --q)
+        c = *p, *p = *q, *q = c;
+    return str;
+}
 
 void init_config(void)
 {
+	serial[0].game_type = SERIAL_LOCAL_ONLY;
+	serial[0].com_port = 1;
+	serial[0].who_decides_damage = DAM_SERVER;
 
-serial[0].game_type = SERIAL_LOCAL_ONLY;
-serial[0].com_port = 1;
-serial[0].who_decides_damage = DAM_SERVER;
-
-serial[0].connection_type = get_config_int("Network", "conection_type", NET_DRIVER_SERIAL_DOS);
-strcpy(serial[0].port_string, get_config_string("Network", "port_string", ""));
-serial[0].com_port = get_config_int("Network", "com_port", 1);
+//serial[0].connection_type = get_config_int("Network", "conection_type", NET_DRIVER_LOCAL);
+//strcpy(serial[0].port_string, get_config_string("Network", "port_string", ""));
+//serial[0].com_port = get_config_int("Network", "com_port", 1);
 
 options[0].run_vsync = get_config_int("Options", "run_vsync", 1);
 options[0].fuzzy_menu = get_config_int("Options", "fuzzy_menu", 1);
@@ -2200,7 +2244,8 @@ player [2].weapon [3] = WPN_NONE;
 for (ci = 0; ci < NO_GAMES; ci ++)
 {
   strcpy(miscstring, "Game");
-  strcat(miscstring, itoa(ci, itstring, 10));
+  strcat(miscstring, my_itoa(ci, itstring,10));
+  //strcat(miscstring, sprintf(ci,itstring,10));
   strcpy(game[ci].gname, get_config_string(miscstring, "Name", "Unknown"));
   game[ci].health_amount = get_config_int(miscstring, "health_amount", 100);
   game[ci].reload_time = get_config_int(miscstring, "reload_time", 10);
@@ -2234,29 +2279,28 @@ for (ci = 0; ci < NO_GAMES; ci ++)
   game[ci].unlimited_clips = get_config_int(miscstring, "unlimited_clips", 0);
   game[ci].reset_weapons = get_config_int(miscstring, "reset_weapons", 0);
   game[ci].atypes_avail = get_config_int(miscstring, "atypes_avail", 2);
-
   
   for (wcount = 0; wcount < NO_WEAPONS; wcount ++)
   {
    strcpy(wstring, "Wpn");
-   strcat(wstring, itoa(wcount, itstring, 10));
+   strcat(wstring, my_itoa(wcount, itstring, 10));
+   //strcat(wstring, sprintf(wstring,itstring,10));
    game[ci].weapon_status [wcount] = get_config_int(miscstring, wstring, 0);
   }
-
+  
   for (wcount = 0; wcount < NO_EQUIP; wcount ++)
   {
    strcpy(wstring, "Eqp");
-   strcat(wstring, itoa(wcount, itstring, 10));
+   strcat(wstring, my_itoa(wcount, itstring ,10));
+   //strcat(wstring,sprintf(wcount,itstring,10));
    game[ci].equip_status [wcount] = get_config_int(miscstring, wstring, 0);
   }
-
-  
 }
 
 for (ci = 0; ci < MAX_AI; ci ++)
 {
   strcpy(miscstring, "AI-");
-  strcat(miscstring, itoa(ci, itstring, 10));
+  strcat(miscstring, my_itoa(ci, itstring, 10));
   strcpy(ai_config[ci].name, get_config_string(miscstring, "Name", ""));
   ai_config[ci].active = get_config_int(miscstring, "Active", 0);
   ai_config[ci].skill = get_config_int(miscstring, "Skill", 0);
@@ -2284,7 +2328,6 @@ arena[0].quickstart_difficulty = get_config_int("Quickstart", "quickstart_diffic
 arena[0].quickstart_dirt = get_config_int("Quickstart", "quickstart_dirt", 2);
 arena[0].quickstart_lightsourced = get_config_int("Quickstart", "quickstart_lightsourced", 1);
 arena[0].quickstart_weapons = get_config_int("Quickstart", "quickstart_weapons", 1);
-
 
 strcpy(arena[0].level_loaded, get_config_string("Level", "Loaded", ""));
 

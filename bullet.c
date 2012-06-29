@@ -41,7 +41,7 @@ This file contains:
 #include "globvar.h"
 
 #include "ai.h"
-#include "async.h"
+//#include "async.h"
 #include "cloud.h"
 #include "display.h"
 #include "prand.h"
@@ -57,6 +57,10 @@ This file contains:
 
 #define PREDRAWN_DIRT_CIRCLES 14
 #define BLOOD_RED COLOUR_RED3
+
+#ifndef PI
+#define PI 3.14159265358979323846
+#endif
 // blood_red also defined in display.c
 
 void destroy_bullet(int dbull);
@@ -954,17 +958,17 @@ void manage_bullet(int mbull)
     case BULLET_TRACKER:
     place_light(bullet[mbull].x, bullet[mbull].y, 50);
     case BULLET_BOUNCY:
-    if (serial[0].game_type == SERIAL_SERVER)
-     async_smart(mbull);
-    break;
+    //if (serial[0].game_type == SERIAL_SERVER)
+    // async_smart(mbull);
+    //break;
     case BULLET_REMOTE_ROCKET:
     case BULLET_REMOTE_ROCKET_C:
     place_light(bullet[mbull].x, bullet[mbull].y, 50);
-    if ((serial[0].game_type == SERIAL_CLIENT
-        && user[actor[bullet[mbull].owner].user].status == USTAT_LOCAL)
-        || serial[0].game_type == SERIAL_SERVER)
-         async_smart(mbull);
-    break;
+ //   if ((serial[0].game_type == SERIAL_CLIENT
+ //       && user[actor[bullet[mbull].owner].user].status == USTAT_LOCAL)
+ //       || serial[0].game_type == SERIAL_SERVER)
+ //        async_smart(mbull);
+ //   break;
     case BULLET_NAPALM:
     place_light(bullet[mbull].x, bullet[mbull].y, 30 + prand(30));
     break;
@@ -1692,10 +1696,10 @@ int fcount = 0;
 //    if (serial[0].
     case BULLET_TRACKER:
     case BULLET_SEEKER:
-    if (serial[0].game_type == SERIAL_SERVER)
-    {
-     async_smart_destroy(ibull);
-    }
+ //   if (serial[0].game_type == SERIAL_SERVER)
+ //   {
+ //    async_smart_destroy(ibull);
+ //   }
     case BULLET_ROCKET:
     case BULLET_LR_ROCKET:
     case BULLET_GREN_LAUNCHER:
@@ -2178,10 +2182,10 @@ int fcount = 0;
      shrapnel_burst(ibull, 10, 50, 0, BULLET_SHRAPNEL);
      blast(bullet[ibull].x, bullet[ibull].y, 4000, bullet[ibull].owner, 400, 30, 5, 5, 1);
      destroy_bullet(ibull);
-     if (serial[0].game_type == SERIAL_SERVER)
-     {
-      async_smart_destroy(ibull);
-     }
+  //   if (serial[0].game_type == SERIAL_SERVER)
+  //   {
+  //    async_smart_destroy(ibull);
+  //   }
      return 1;
     }
     if (serial[0].game_type != SERIAL_CLIENT)
@@ -2784,17 +2788,17 @@ if (shielded)
  }
 }
 
- if (serial[0].game_type == SERIAL_CLIENT)
- {
-  if ((serial[0].who_decides_damage == DAM_SUFFERER
-        && actor[hactor].player != 0)
-      || (serial[0].who_decides_damage == DAM_INFLICTOR
-          && actor[hurter].player != 0))
-  {
-   async_hurt(hactor, hurter, harm);
-  }
-  return 0;
- }
+ //if (serial[0].game_type == SERIAL_CLIENT)
+ //{
+ // if ((serial[0].who_decides_damage == DAM_SUFFERER
+ //       && actor[hactor].player != 0)
+ //     || (serial[0].who_decides_damage == DAM_INFLICTOR
+ //         && actor[hurter].player != 0))
+ // {
+ //  async_hurt(hactor, hurter, harm);
+ // }
+ // return 0;
+ //}
  
 /*
  if (serial[0].game_type == SERIAL_SERVER)
@@ -3443,10 +3447,10 @@ void actor_die(int dactor, int cause)
       else score_event(cause, SCORE_KILL, dactor);
     }
 
-    if (serial[0].game_type == SERIAL_SERVER)
-    {
-     async_kill(dactor, cause);
-    }
+ //   if (serial[0].game_type == SERIAL_SERVER)
+ //   {
+ //    async_kill(dactor, cause);
+ //   }
 
 //    if (game[0].lives_each > 0)
 //    {

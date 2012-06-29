@@ -43,7 +43,7 @@ This file contains:
 #include "config.h"
 #include "globvar.h"
 
-#include "async.h"
+//#include "async.h"
 #include "grid.h"
 #include "prand.h"
 #include "display.h"
@@ -83,7 +83,7 @@ void spawn_actor(int sactor, char async)
  if (async == 0 && serial[0].game_type == SERIAL_CLIENT
   && user[actor[sactor].user].player > 0)
  {
-  async_spawn(sactor, actor[sactor].soldier);
+  //async_spawn(sactor, actor[sactor].soldier);
  }
 
  user[actor[sactor].user].resting_time = 329;

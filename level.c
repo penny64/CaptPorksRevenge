@@ -48,6 +48,11 @@ This file contains:
 
 #define COL_CLASSIC_FRONT COLOUR_BROWN3
 #define COL_CLASSIC_BACK COLOUR_GREY1
+
+#ifndef PI
+#define PI 3.14159265358979323846
+#endif
+
 //#define COL_CLASSIC_FRONT 209
 //#define COL_CLASSIC_BACK 217
 
