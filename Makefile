@@ -1,11 +1,11 @@
 CC     = gcc
-CFLAGS = -g
+CFLAGS = -Wall -O2
 OS     = $(shell uname)
 
 ifeq ($(OS), Linux)
 	LDFLAGS = -lalleg -lnet -lm
 else
-	LDFLAGS = -lallegro -L ./ -lnet -lm
+	LDFLAGS = -L ./ -lallegro-4.4.2-monolith-md-debug -lnet -lm
 endif
 
 
