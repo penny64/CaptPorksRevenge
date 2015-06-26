@@ -119,7 +119,7 @@ acthead.h is no longer linked to a datafile, but still controls the order
 #include <string.h>
 //#include <conio.h>
 #include "allegro.h"
-#include "libnet.h"
+//#include "libnet.h"
 
 #include "config.h"
 
@@ -1012,12 +1012,11 @@ void init_everything_once(void)
    
 //   clrscr();
 
-   printf("Welcome to Captain Pork's Revenge 2012 (version 1.02)!\n");
+   printf("Welcome to Captain Pork's Revenge (version 1.02)!\n");
    printf("Captain Pork's Revenge is free software\n");
    printf("(you are welcome to redistribute it under certain\n");
    printf("conditions) and comes with absolutely no warranty.\n");
    printf("For details read LICENCE.TXT.\n");
-   printf("Ported to Windows/Linux by flags.\n");
    //printf("\n\r\n\rPress 3 to start in 320x200 mode or any other key for 640x480.");
    init_config();
    init_sound();
@@ -1036,7 +1035,7 @@ void init_everything_once(void)
    video_modes();
    // NOTE: 800x600 not tested as my monitor doesn't like set_gfx_mode
    
-   set_color_depth(8);
+   //set_color_depth(8);
 
    switch(video_mode)
    {

@@ -32,7 +32,7 @@ This file contains:
 */
 
 #include "allegro.h"
-#include "libnet.h"
+//#include "libnet.h"
 
 #include <math.h>
 #include <string.h>

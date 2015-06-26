@@ -3,15 +3,15 @@ CFLAGS = -Wall -O2
 OS     = $(shell uname)
 
 ifeq ($(OS), Linux)
-	LDFLAGS = -lalleg -lnet -lm
+	LDFLAGS = -lalleg -lm
 else
-	LDFLAGS = -L ./ -lallegro-4.4.2-monolith-md-debug -lnet -lm
+	LDFLAGS = -L./ -lallegro -static-libgcc -lm
 endif
 
 
 all: CaptPorksRevenge
 
-CaptPorksRevenge: *.c
+CaptPorksRevenge: actor.o ai.o base.o bullet.o chall.o cloud.o cmds.o connect.o display.o effects.o grid.o level.o light.o menu.o misc.o move.o palette.o pickup.o prand.o proj.o score.o sound.o weapon.o
 		$(CC) $(LDFLAGS) -o $@ $^
 
 clean: FRC

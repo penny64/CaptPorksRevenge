@@ -30,7 +30,7 @@ This file contains:
 */
 
 #include "allegro.h"
-#include "libnet.h"
+//#include "libnet.h"
 
 #include "config.h"
 #include "globvar.h"
